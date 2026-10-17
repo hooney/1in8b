@@ -1,12 +1,796 @@
-<!doctype html>
-<html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Stay With Coffee Menu CMS</title>
-    <meta http-equiv="refresh" content="0; url=menu.html" />
-  </head>
-  <body>
-    <a href="menu.html">메뉴 보기</a>
-  </body>
-</html>
+<meta charset="utf-8">
+<title>80억 분의 1의 권리</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=IBM+Plex+Sans+KR:wght@500;700&display=swap">
+<style>
+/* Layout: exhibition poster split — night-navy field with a cream serif headline, an orange information panel,
+   and a dotted orange path (the "첫걸음") that threads every screen. Single deliberate dark theme. */
+:root{
+  --navy:#1f2d41;
+  --navy-2:#283a52;
+  --navy-3:#3a5373;
+  --orange:#e07b39;
+  --orange-deep:#b85a22;
+  --ink:#1a2333;
+  --cream:#f5eddc;
+  --paper:#fbf6ea;
+  --yellow:#f4d44d;
+  --muted:#a7b3c5;
+  --line:rgba(245,237,220,.16);
+  --f-display:"Gowun Batang","Nanum Myeongjo","Batang",serif;
+  --f-body:"Gowun Dodum","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-num:"IBM Plex Sans KR","Malgun Gothic",sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{min-height:100%}
+body{margin:0;background:var(--navy);color:var(--cream);font-family:var(--f-body);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.screen{min-height:100vh;min-height:100dvh}
+.eyebrow{color:var(--orange);letter-spacing:.32em;font-size:15px;font-weight:400}
+.eyebrow b{font-family:var(--f-num);font-weight:700;letter-spacing:.18em}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;text-wrap:balance;margin:0}
+.btn{display:inline-flex;align-items:center;gap:.6em;border:0;border-radius:999px;padding:.85em 1.7em;font-size:18px;letter-spacing:.06em;transition:transform .15s,background .15s}
+.btn-primary{background:var(--orange);color:var(--ink);font-weight:700}
+.btn-primary:hover{background:var(--yellow)}
+.btn-ghost{background:transparent;color:var(--cream);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn-ghost:hover{box-shadow:inset 0 0 0 1.5px var(--cream)}
+.btn:active{transform:scale(.97)}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+
+/* ---------- intro ---------- */
+#intro{display:grid;grid-template-columns:1.25fr 1fr;min-height:100vh;min-height:100dvh}
+.intro-left{position:relative;display:flex;flex-direction:column;justify-content:center;gap:28px;padding-block:72px 220px;padding-left:max(16px,env(safe-area-inset-left,0px),6vw);padding-right:max(16px,4vw);overflow:hidden}
+.intro-left h1{font-size:clamp(46px,7.2vw,104px);line-height:1.12;letter-spacing:-.01em}
+.intro-left h1 .small{display:block;font-size:.42em;color:var(--yellow);letter-spacing:.02em;margin-bottom:.35em}
+.lead{font-size:clamp(17px,1.6vw,21px);color:var(--cream);opacity:.9;max-width:34em;margin:0}
+.intro-meta{display:flex;flex-wrap:wrap;gap:14px 36px;align-items:center}
+.counter{display:flex;gap:28px}
+.counter div{display:flex;flex-direction:column}
+.counter .num{font-size:30px;font-weight:700;line-height:1}
+.counter span{font-size:13px;color:var(--muted)}
+.notice{font-size:13.5px;color:var(--muted);max-width:40em;margin:0}
+.landscape{position:absolute;left:0;right:0;bottom:0;height:200px;pointer-events:none}
+.landscape svg{width:100%;height:100%;display:block}
+.venue{font-size:16px;letter-spacing:.04em}
+
+.intro-right{background:var(--orange);color:var(--ink);display:flex;flex-direction:column;justify-content:center;gap:22px;padding-block:56px;padding-left:max(16px,4vw);padding-right:max(16px,env(safe-area-inset-right,0px),5vw)}
+.intro-right .kicker{font-weight:700;letter-spacing:.24em;font-size:14px;color:var(--cream)}
+.intro-right h2{font-size:clamp(30px,3.4vw,46px);color:var(--cream);line-height:1.2}
+.intro-right h2 em{font-style:normal;color:var(--yellow)}
+.rate{font-family:var(--f-num);font-weight:700;font-size:clamp(56px,7vw,92px);line-height:1;color:var(--cream);letter-spacing:-.02em}
+.rate small{font-family:var(--f-body);font-size:16px;font-weight:400;letter-spacing:0;color:var(--ink);margin-left:.4em}
+.bars{display:grid;gap:7px;margin:0;padding:0;list-style:none}
+.bars li{display:grid;grid-template-columns:7.5em 1fr 3.4em;align-items:center;gap:10px;font-size:15px}
+.bars .track{height:9px;background:rgba(26,35,51,.16);border-radius:9px;overflow:hidden}
+.bars .fill{height:100%;background:var(--ink);border-radius:9px}
+.bars .pct{text-align:right;font-family:var(--f-num);font-variant-numeric:tabular-nums;font-weight:500}
+.src-note{font-size:12.5px;opacity:.78;margin:0}
+
+/* ---------- roulette ---------- */
+#roulette{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;position:relative;padding-block:40px}
+.r-label{color:var(--muted);letter-spacing:.3em;font-size:15px}
+.r-name{font-family:var(--f-display);font-weight:700;font-size:clamp(56px,11vw,150px);line-height:1.2;height:1.2em;max-width:100%;white-space:nowrap;padding-inline:16px}
+@media (max-width:620px){.r-name{font-size:clamp(28px,8vw,44px)}}
+.r-sub{font-family:var(--f-num);color:var(--orange);font-size:17px;min-height:1.5em}
+.r-steps{display:flex;gap:10px;margin-top:20px}
+.r-steps i{width:10px;height:10px;border-radius:50%;background:var(--navy-3);transition:background .3s}
+.r-steps i.on{background:var(--orange)}
+.r-skip{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:max(24px,env(safe-area-inset-bottom,0px))}
+
+/* ---------- certificate ---------- */
+#birth{padding-block:56px 80px}
+.cert{background:var(--paper);color:var(--ink);border-radius:6px;max-width:860px;margin:0 auto;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.cert-head{background:var(--orange);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 28px}
+.cert-head h2{font-size:22px;color:var(--cream);letter-spacing:.3em}
+.cert-head .no{font-family:var(--f-num);font-size:13px;letter-spacing:.08em;color:var(--ink)}
+.cert-body{padding:30px 28px 34px;display:grid;gap:26px}
+.cert .lbl{font-size:12.5px;letter-spacing:.14em;color:#6b7383}
+.cert-name{font-family:var(--f-display);font-weight:700;font-size:clamp(36px,6vw,58px);line-height:1.15}
+.cert-story{font-size:18px;margin:6px 0 0;max-width:40em}
+.fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 20px;border-top:1px solid rgba(26,35,51,.14);padding-top:22px}
+.fields .v{font-size:18px;font-weight:700;font-family:var(--f-num)}
+.dots{letter-spacing:.12em;color:var(--orange-deep)}
+.odds{background:#f3ead6;border-radius:4px;padding:16px 18px;font-size:15.5px;margin:0}
+.cmp{width:100%;border-collapse:collapse;font-size:15px;color:var(--ink);font-family:var(--f-body)}
+.cmp th,.cmp td{padding:9px 6px;text-align:right;border-bottom:1px solid rgba(26,35,51,.12)}
+.cmp th:first-child,.cmp td:first-child{text-align:left}
+.cmp thead th{font-weight:400;color:#6b7383;font-size:13px}
+.cmp td{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+.cmp td:first-child{font-family:var(--f-body)}
+.cmp .hi{color:var(--orange-deep);font-weight:700}
+.same{max-width:860px;margin:36px auto 0}
+.same h3{font-size:20px;margin-bottom:12px}
+.same ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 24px}
+.same li{border-top:1px solid var(--line);padding-top:10px;font-size:15px}
+.same li b{font-family:var(--f-display);font-size:17px;display:block}
+.same li span{color:var(--muted)}
+.next-row{max-width:860px;margin:36px auto 0;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+
+/* ---------- issues ---------- */
+#issues{padding-block:64px 80px}
+.issues-head{max-width:860px;margin:0 auto 44px;display:grid;gap:14px}
+.issues-head h2{font-size:clamp(32px,4.6vw,54px);line-height:1.2}
+.issues-head h2 em{font-style:normal;color:var(--orange)}
+.issues-head p{color:var(--muted);margin:0;max-width:40em}
+.timeline{max-width:860px;margin:0 auto;position:relative;display:grid;gap:40px;padding-left:64px}
+.timeline::before{content:"";position:absolute;left:22px;top:10px;bottom:10px;border-left:4px dotted var(--orange);opacity:.85}
+.issue{position:relative;background:var(--orange);color:var(--ink);border-radius:4px;padding:28px 30px 24px;display:grid;gap:16px;animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+.issue::before{content:"";position:absolute;left:-52px;top:26px;width:22px;height:22px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 6px var(--navy)}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.issue .age{font-family:var(--f-display);font-weight:700;color:var(--cream);font-size:20px;letter-spacing:.06em}
+.issue h3{font-size:clamp(28px,3.6vw,40px);line-height:1.2;color:var(--cream)}
+.issue p.body{margin:0;font-size:18px;max-width:38em}
+.issue .stat{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;border-top:1.5px solid rgba(26,35,51,.22);padding-top:14px}
+.issue .stat b{font-family:var(--f-num);font-size:clamp(30px,4vw,42px);line-height:1.1;color:var(--yellow);text-shadow:0 1px 0 rgba(26,35,51,.25);font-weight:700}
+.issue .stat span{font-size:15px;min-width:0;flex:1 1 14em}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--cream);font-size:13.5px;border-radius:3px;padding:5px 10px 5px 5px}
+.tag .sq{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:2px;color:#fff;font-family:var(--f-num);font-weight:700;font-size:13px}
+.tag.udhr{padding-left:10px;background:rgba(26,35,51,.14);color:var(--ink)}
+.issue .src{font-size:12.5px;opacity:.82;margin:0}
+.more-row{max-width:860px;margin:40px auto 0;padding-left:64px;display:flex;gap:12px;flex-wrap:wrap}
+
+/* ---------- closing ---------- */
+.closing{max-width:860px;margin:72px auto 0;display:grid;gap:28px;border-top:1px solid var(--line);padding-top:48px}
+.closing blockquote{margin:0;font-family:var(--f-display);font-size:clamp(24px,3.2vw,34px);line-height:1.5}
+.closing blockquote cite{display:block;font-family:var(--f-body);font-style:normal;font-size:15px;color:var(--orange);margin-top:12px;letter-spacing:.08em}
+.ask{background:var(--navy-2);border-radius:4px;padding:22px 24px}
+.ask h3{font-size:22px;color:var(--yellow);margin-bottom:6px}
+.ask p{margin:0;color:var(--cream);opacity:.9}
+.fine{font-size:13px;color:var(--muted);margin:0}
+.bridge{margin:0;font-family:var(--f-display);font-size:clamp(20px,2.4vw,26px);line-height:1.55;color:var(--cream)}
+.bridge em{font-style:normal;color:var(--yellow)}
+
+/* exhibition schedule: the orange information panel from the poster */
+.visit{background:var(--orange);color:var(--ink);border-radius:4px;padding:36px 34px 30px;display:grid;gap:4px}
+.v-eyebrow{font-weight:700;letter-spacing:.24em;font-size:14px}
+.visit h3{font-size:clamp(36px,5vw,56px);line-height:1.15;margin-bottom:14px}
+.v-rows{margin:0;display:grid}
+.v-rows>div{display:grid;grid-template-columns:7em minmax(0,1fr);gap:12px;border-top:1px solid rgba(26,35,51,.35);padding-block:18px}
+.v-rows>div:last-child{border-bottom:1px solid rgba(26,35,51,.35)}
+.v-rows dt{font-weight:700;font-size:17px;padding-top:.3em}
+.v-rows dd{margin:0;font-family:var(--f-display);font-weight:700;font-size:clamp(22px,2.8vw,32px);line-height:1.4}
+.v-rows dd .num{font-family:var(--f-display)}
+.v-rows dd small{display:block;font-size:.72em;font-weight:400}
+.v-hours{margin-top:18px;display:grid;gap:10px}
+.v-label{font-weight:700;font-size:17px}
+.hours-bar{display:grid;grid-template-columns:6fr 2fr 2fr;gap:5px}
+.seg{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:58px;padding:10px 18px;border-radius:5px;font-weight:700;font-size:clamp(14px,1.6vw,19px);min-width:0}
+.seg span{min-width:0;white-space:nowrap}
+.seg-night,.seg-rest{padding-inline:12px}
+.seg-day{background:var(--ink);color:var(--cream)}
+.seg-rest{background:#f5c9a2;color:var(--ink);justify-content:center}
+.m-only{display:none}
+.seg-night{background:#243650;color:var(--cream)}
+.sun{flex:none;width:30px;height:30px;border-radius:50%;background:#f0a970}
+.moon{flex:none;width:30px;height:30px;color:var(--cream)}
+.ticks{position:relative;height:22px;font-size:14px;font-weight:700;margin-inline:2px}
+.ticks span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap}
+.ticks span:first-child{transform:none}
+.ticks span:last-child{transform:translateX(-100%)}
+.v-note{margin:16px 0 0;font-size:14.5px}
+
+/* last request: one person → family → region → world */
+.ripple{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;align-items:center;padding-block:20px}
+.ripple h3{font-size:clamp(32px,4.4vw,50px);line-height:1.25;margin:10px 0 18px}
+.ripple p{margin:0;font-size:19px;opacity:.92}
+.ripple em{font-style:normal;color:var(--orange)}
+.rings{width:100%;max-width:320px;justify-self:center}
+.end-actions{display:flex;flex-wrap:wrap;gap:12px}
+.share-box{display:grid;gap:10px}
+.share-msg{margin:0;color:var(--yellow);font-weight:700}
+.share-box textarea{width:100%;background:var(--navy-2);color:var(--cream);border:1px solid var(--line);border-radius:4px;padding:12px 14px;font:15px/1.6 var(--f-body);resize:none}
+
+@media (max-width:900px){
+  #intro{grid-template-columns:1fr}
+  .intro-left{padding-block:56px 200px}
+}
+@media (max-width:620px){
+  .fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .same ul{grid-template-columns:1fr}
+  .timeline,.more-row{padding-left:36px}
+  .timeline::before{left:8px}
+  .issue{padding:22px 18px 20px}
+  .issue::before{left:-36px;width:18px;height:18px}
+  .cert-body{padding:24px 18px 28px}
+  .cert-head{padding:12px 18px}
+  .bars li{grid-template-columns:6.5em 1fr 3.2em;font-size:14px}
+  .visit{padding:26px 18px 22px}
+  .v-rows>div{grid-template-columns:1fr;gap:2px}
+  .hours-bar{grid-template-columns:1fr}
+  .seg-rest{justify-content:flex-start}
+  .ticks{display:none}
+  .m-only{display:inline}
+  .ripple{grid-template-columns:1fr}
+  .rings{max-width:240px}
+}
+@media (prefers-reduced-motion:reduce){
+  .issue{animation:none}
+  .btn{transition:none}
+}
+</style>
+
+<!-- ============ INTRO ============ -->
+<section id="intro" class="screen">
+  <div class="intro-left">
+    <div class="eyebrow">제주방면 · <b>2026</b> 인권교육전</div>
+    <h1><span class="small">변혁의 첫걸음, 인권교육의 힘展</span>80억 분의 1의 권리</h1>
+    <p class="lead">지금 이 순간에도 1초에 네 명꼴로 아기가 태어납니다. 어디서, 어떤 성별로 태어날지는 아무도 고르지 않았습니다. 한 아이로 태어나, 그 아이가 살면서 마주할 수 있는 인권 문제를 만나 보세요.</p>
+    <div class="intro-meta">
+      <button class="btn btn-primary" id="bornBtn">태어나기 <span aria-hidden="true">→</span></button>
+      <div class="counter" aria-live="off">
+        <div><b class="num" id="cBorn">0</b><span>이 화면을 연 뒤 태어난 아기</span></div>
+      </div>
+    </div>
+    <p class="notice">분쟁, 폭력, 차별 같은 무거운 주제가 나옵니다. 장면을 묘사하지 않고, UN과 국제기구 보고서의 사실과 통계로만 전합니다.</p>
+    <div class="venue"><span class="num">2026. 11. 20 – 12. 5</span> · 서제주희망문화회관</div>
+    <div class="landscape" aria-hidden="true">
+      <svg viewBox="0 0 1000 200" preserveAspectRatio="xMidYMax slice">
+        <path d="M0 120 C 200 90, 420 140, 620 105 S 900 80, 1000 100 L1000 200 L0 200Z" fill="#283a52"/>
+        <path d="M300 200 L470 70 Q490 58 510 70 L700 200Z" fill="#3a5373"/>
+        <path d="M0 160 C 250 130, 520 175, 760 150 S 950 140, 1000 150 L1000 200 L0 200Z" fill="#22334a"/>
+        <circle cx="530" cy="30" r="28" fill="#e07b39"/>
+        <g fill="#e07b39">
+          <circle cx="170" cy="190" r="5"/><circle cx="205" cy="182" r="5"/><circle cx="240" cy="172" r="5"/>
+          <circle cx="272" cy="160" r="5"/><circle cx="300" cy="146" r="5"/><circle cx="326" cy="131" r="5"/>
+          <circle cx="350" cy="116" r="5"/><circle cx="372" cy="101" r="5"/><circle cx="392" cy="86" r="5"/>
+          <circle cx="410" cy="72" r="5"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <aside class="intro-right">
+    <div class="kicker">지금 태어나는 아기라면</div>
+    <h2>어디서 태어날지<br><em>고를 수 없습니다</em></h2>
+    <div class="rate">4.2<small>명 / 1초</small></div>
+    <ul class="bars" id="bars"></ul>
+    <p class="src-note">세계 출생아 중 나라별 비율 · UN 세계인구전망 2024 기준 근사치. 이 전시는 출생아의 약 4분의 3을 차지하는 40개국을 실제 비율대로 뽑습니다.</p>
+  </aside>
+</section>
+
+<!-- ============ ROULETTE ============ -->
+<section id="roulette" class="screen" hidden>
+  <div class="r-label" id="rLabel">출생지를 정하는 중</div>
+  <div class="r-name" id="rName" aria-live="polite"></div>
+  <div class="r-sub" id="rSub"></div>
+  <div class="r-steps" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <button class="btn btn-ghost r-skip" id="skipBtn">건너뛰기</button>
+</section>
+
+<!-- ============ BIRTH CERTIFICATE ============ -->
+<section id="birth" class="screen wrap" hidden>
+  <article class="cert">
+    <header class="cert-head"><h2>출생 신고</h2><span class="no" id="certNo"></span></header>
+    <div class="cert-body">
+      <div>
+        <div class="lbl">이름</div>
+        <div class="cert-name" id="certName"></div>
+        <p class="cert-story" id="certStory"></p>
+      </div>
+      <div class="fields" id="fields"></div>
+      <p class="odds" id="odds"></p>
+      <div id="cmpWrap" style="overflow-x:auto"></div>
+    </div>
+  </article>
+  <div class="same">
+    <h3>같은 1초에 지구 어딘가에서 태어난 사람들</h3>
+    <ul id="sameList"></ul>
+  </div>
+  <div class="next-row">
+    <button class="btn btn-ghost" id="rebirth1">다시 태어나기</button>
+    <button class="btn btn-primary" id="toIssues">이 아이가 마주할 수 있는 일 <span aria-hidden="true">→</span></button>
+  </div>
+</section>
+
+<!-- ============ ISSUES ============ -->
+<section id="issues" class="screen wrap" hidden>
+  <div class="issues-head">
+    <div class="eyebrow" id="iEyebrow"></div>
+    <h2 id="iTitle"></h2>
+    <p>같은 나라에서 태어나도 지역, 가정 형편, 민족, 종교에 따라 삶은 크게 다릅니다. 아래는 이 아이가 반드시 겪는 일이 아니라, UN과 국제기구가 이 나라의 같은 성별에게 일어나고 있다고 기록한 일입니다.</p>
+  </div>
+  <div class="timeline" id="timeline"></div>
+  <div class="more-row" id="moreRow">
+    <button class="btn btn-primary" id="nextIssue"></button>
+  </div>
+  <div class="closing" id="closing" hidden>
+    <blockquote>모든 인간은 태어날 때부터 자유로우며 그 존엄과 권리에 있어 동등하다.<cite>세계인권선언 제1조</cite></blockquote>
+    <div class="ask">
+      <h3>잠시 생각해 보세요</h3>
+      <p id="askText"></p>
+    </div>
+    <p class="bridge" id="bridgeText"></p>
+
+    <section class="visit" aria-labelledby="visitTitle">
+      <div class="v-eyebrow">꼭 기억해 주세요</div>
+      <h3 id="visitTitle">언제, 어디서</h3>
+      <dl class="v-rows">
+        <div><dt>언제</dt><dd><span class="num">2026</span>년 <span class="num">11</span>월 <span class="num">20</span>일~<span class="num">12</span>월 <span class="num">5</span>일, 약 2주 동안<small>20일은 개막식으로 일반 관람은 하지 않습니다.</small></dd></div>
+        <div><dt>어디서</dt><dd>서제주희망문화회관</dd></div>
+      </dl>
+      <div class="v-hours">
+        <div class="v-label">몇 시에</div>
+        <div class="hours-bar">
+          <div class="seg seg-day"><span>관람 오전 11시 ~ 오후 5시</span><i class="sun" aria-hidden="true"></i></div>
+          <div class="seg seg-rest"><span>쉬는 시간<span class="m-only"> · 오후 5~7시</span></span></div>
+          <div class="seg seg-night"><span>야간 7~9시</span><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3a9 9 0 1 0 5.5 15.6A8 8 0 0 1 15.5 3z" fill="currentColor"/></svg></div>
+        </div>
+        <div class="ticks num" aria-hidden="true"><span style="left:0">11시</span><span style="left:60%">17시</span><span style="left:80%">19시</span><span style="left:100%">21시</span></div>
+      </div>
+      <p class="v-note">야간 관람은 예정입니다. 정확한 시작 날짜와 시간은 정해지는 대로 다시 알려드립니다.</p>
+    </section>
+
+    <section class="ripple" aria-labelledby="rippleTitle">
+      <div>
+        <div class="eyebrow">마지막 부탁</div>
+        <h3 id="rippleTitle">한 사람이 바뀌면<br>가정이, 지역이,<br>세상이 바뀝니다</h3>
+        <p>가족·친구·이웃에게 <em>“같이 가보자”</em><br>한마디를 건네주세요</p>
+      </div>
+      <svg class="rings" viewBox="0 0 320 320" role="img" aria-label="나에서 가정, 지역, 세상으로 퍼져 나가는 동심원">
+        <circle cx="160" cy="160" r="156" fill="#e07b39" fill-opacity=".07" stroke="#e07b39" stroke-opacity=".7" stroke-width="1.5"/>
+        <circle cx="160" cy="160" r="116" fill="#e07b39" fill-opacity=".12" stroke="#e07b39" stroke-opacity=".75" stroke-width="1.5"/>
+        <circle cx="160" cy="160" r="76" fill="#e07b39" fill-opacity=".22" stroke="#e07b39" stroke-opacity=".8" stroke-width="1.5"/>
+        <circle cx="160" cy="160" r="36" fill="#e07b39"/>
+        <circle cx="160" cy="150" r="8.5" fill="#1f2d41"/>
+        <path d="M144 176 q0-17 16-17 q16 0 16 17z" fill="#1f2d41"/>
+        <g fill="#f5eddc" font-family="Gowun Dodum, sans-serif" font-size="15" font-weight="700" text-anchor="middle">
+          <text x="160" y="27">세상</text><text x="160" y="67">지역</text><text x="160" y="107">가정</text>
+        </g>
+      </svg>
+    </section>
+
+    <div class="end-actions">
+      <button class="btn btn-primary" id="shareBtn">친구에게 공유 <span aria-hidden="true">↗</span></button>
+      <button class="btn btn-ghost" id="home">처음으로</button>
+    </div>
+    <div class="share-box" id="shareBox" hidden>
+      <p class="share-msg" id="shareMsg" role="status" aria-live="polite"></p>
+      <textarea id="shareText" readonly rows="4" aria-label="공유할 문구"></textarea>
+    </div>
+    <p class="fine">통계는 UN 기구(UNICEF, UNFPA, OHCHR, UN Women, ILO, WHO 등)와 각국 정부·국제 인권단체의 공개 보고서를 바탕으로 정리한 근사치이며, 보고서마다 기준 연도가 다릅니다. 분쟁·실향·사형처럼 빠르게 바뀌는 수치는 2026년 10월에 최신 발표로 확인했습니다. 무작위로 정해진 한 아이의 삶을 예측하지 않습니다. 이 전시는 차별의 원인이 그 나라 사람들에게 있다고 말하지 않습니다. 인권 문제는 어느 나라에나 있고, 한국도 예외가 아닙니다.</p>
+  </div>
+</section>
+
+<script>
+/* ---------- reference tables ---------- */
+const SDG={1:['빈곤 퇴치','#E5243B'],2:['기아 종식','#DDA63A'],3:['건강과 웰빙','#4C9F38'],4:['양질의 교육','#C5192D'],5:['성평등','#FF3A21'],8:['양질의 일자리와 경제성장','#A21942'],10:['불평등 감소','#DD1367'],11:['지속가능한 도시와 주거','#FD9D24'],13:['기후변화 대응','#3F7E44'],16:['평화·정의·강력한 제도','#00689D']};
+const ART={2:'차별받지 않을 권리',3:'생명과 신체의 안전',4:'노예 상태에 놓이지 않을 권리',5:'잔혹한 처우를 받지 않을 권리',7:'법 앞의 평등',9:'자의적으로 구금되지 않을 권리',10:'공정한 재판을 받을 권리',12:'사생활을 보호받을 권리',13:'이동과 거주의 자유',15:'국적을 가질 권리',16:'자유로운 합의에 따른 혼인',18:'사상·양심·종교의 자유',19:'의견과 표현의 자유',20:'평화적 집회·결사의 자유',23:'일할 권리와 공정한 노동조건',25:'적절한 생활수준과 건강',26:'교육받을 권리'};
+const WEALTH=['','가장 가난한 20%','하위 20~40%','중간 40~60%','상위 20~40%','가장 부유한 20%'];
+const WLIGHT=['','가장 가난한 집','넉넉하지 않은 집','평범한 집','형편이 좋은 집','가장 부유한 집'];
+
+/* ---------- country data ----------
+   w: share of world births (%) · le: life expectancy [male,female] · u5: under-5 deaths per 1,000 · ur: urban %
+   is: [gender(f/m/a), age, title, body, stat, statCaption, SDG, UDHR article, source, ageLabel?] */
+const C=[
+{id:'IND',n:'인도',w:17.6,le:[70.5,73.9],u5:29,ur:36,city:['뭄바이','델리'],nm:{m:['아르준','라훌','비크람','아미트'],f:['프리야','아난야','수니타','디비야']},sn:['샤르마','쿠마르','야다브','싱'],is:[
+['f',0,'태어나기 전의 선택','아들을 선호하는 문화 때문에 태아의 성별을 확인하고 여아를 낙태하는 일이 법으로 금지된 뒤에도 이어지고 있습니다. 태어나는 것 자체가 첫 번째 관문이 될 수 있습니다.','4,580만 명','UNFPA가 추정한 인도의 ‘사라진 여성’ 수 (2020)',5,3,'UNFPA 세계인구현황 보고서 2020','태어나기 전'],
+['f',16,'열여섯의 결혼','법정 혼인 연령은 18세지만, 농촌과 가난한 가정에서는 학교를 그만두고 일찍 결혼하는 일이 여전히 흔합니다.','23%','20~24세 여성 중 18세 전에 결혼한 비율',5,16,'UNICEF · 인도 국가가족건강조사(NFHS-5, 2019–21)'],
+['f',24,'집 안의 폭력','결혼 뒤 남편이나 시가족의 폭력을 겪어도 신고하기 어렵습니다. 지참금을 둘러싼 폭력과 죽음도 해마다 수천 건 보고됩니다.','29%','결혼한 적 있는 18~49세 여성 중 배우자 폭력을 겪은 비율',5,5,'인도 국가가족건강조사(NFHS-5) · UN 여성폭력 특별보고관'],
+['m',10,'학교 대신 일터로','가난한 집의 아이는 농장, 벽돌 공장, 작은 공방에서 일을 시작하기도 합니다. 일하는 시간만큼 배울 기회가 줄어듭니다.','1,010만 명','5~14세 아동 노동자 수 (2011 인구조사)',8,4,'ILO · 인도 2011년 인구조사'],
+['a',18,'태어난 카스트','법으로 금지된 카스트 차별은 여전히 결혼, 일자리, 마을 우물 사용까지 가릅니다. 달리트로 태어났다면 맨손으로 오물을 치우는 일을 강요받기도 합니다.','5만 건+','해마다 경찰에 등록되는 지정카스트 대상 범죄',10,2,'UN 소수자 문제 특별보고관 · 인도 국가범죄기록국(NCRB)'],
+['m',22,'보호받지 못하는 노동','일하는 사람 대부분이 계약서도 사회보험도 없는 비공식 일자리에서 일합니다. 다치거나 해고돼도 기댈 곳이 없습니다.','약 90%','비공식 고용에 속한 노동자 비율',8,23,'ILO 인도 고용보고서 2024']]},
+{id:'CHN',n:'중국',w:6.7,le:[75.0,80.9],u5:7,ur:66,city:['충칭','광저우'],ff:1,nm:{m:['하오란','쯔쉬안','위천','쥔제'],f:['위퉁','신이','메이링','쯔한']},sn:['왕','리','장','류'],is:[
+['a',6,'부모와 떨어져 자라는 아이','호적(후커우) 제도 때문에 도시로 일하러 간 부모를 따라가지 못하고 고향에 남겨지는 아이들이 많습니다. 도시에서 살아도 그 도시의 학교와 의료 혜택을 온전히 받기 어렵습니다.','6,700만 명','부모 한쪽 또는 양쪽과 떨어져 사는 아동 (2020)',10,13,'UNICEF 중국 · 2020년 인구센서스 분석'],
+['f',23,'면접에서 받는 질문','채용 공고에 ‘남성 우대’가 붙거나, 면접에서 결혼과 출산 계획을 묻는 일이 흔합니다. 출산 뒤 승진에서 밀리기도 합니다.','‘남성만’','HRW가 분석한 공무원 채용 공고 상당수에 붙은 조건 (2018)',5,23,'휴먼라이츠워치 〈Only Men Need Apply〉 2018 · UN 여성차별철폐위원회'],
+['m',20,'만들 수 없는 노동조합','장시간 노동이 이어져도 독립적인 노동조합을 만들 수 없습니다. 임금 체불에 항의하다 구금되는 노동자도 있습니다.','0개','정부에서 독립된 합법 노동조합',8,23,'ILO 결사의자유위원회 · UN 사회권위원회'],
+['a',17,'말할 수 없는 것들','인터넷 검색과 SNS 게시물이 검열되고, 정부를 비판한 글 때문에 처벌받을 수 있습니다. 신장 위구르 등 소수민족 지역에서는 더 심각한 인권침해가 보고됐습니다.','178위','국경없는기자회 언론자유지수 (180개국 중, 2026)',16,19,'국경없는기자회 2026 · UN 인권최고대표사무소 신장 평가 보고서(2022)']]},
+{id:'NGA',n:'나이지리아',w:5.7,le:[53.5,54.5],u5:107,ur:54,city:['라고스','카노'],nm:{m:['에메카','이브라힘','투비','무사'],f:['은고지','아이샤','페미','치오마']},sn:['오코예','벨로','아데예미','무함마드'],is:[
+['f',15,'열다섯의 신부','북부 농촌에서는 초경 무렵 결혼이 정해지기도 합니다. 결혼과 함께 학교와 멀어지고, 이른 출산은 목숨을 위협합니다.','약 30%','20~24세 여성 중 18세 전에 결혼한 비율',5,16,'UNICEF 나이지리아 · MICS 2021'],
+['f',0,'여성 할례','여성 성기 훼손(FGM)은 2015년 연방법으로 금지됐지만, 일부 지역과 공동체에서는 여전히 아기 때 행해집니다.','약 20%','15~49세 여성 중 할례를 겪은 비율',5,5,'UNICEF · 나이지리아 인구보건조사 2018','아기일 때'],
+['a',9,'학교 가는 길의 위험','2014년 치복 여학생 납치 이후에도 무장단체의 학교 습격과 납치가 이어집니다. 많은 아이들이 아예 학교에 다니지 못합니다.','5명 중 1명','세계 학교 밖 아동 가운데 나이지리아 아동의 비율',4,26,'UNICEF 나이지리아 · UN 사무총장 아동과 무력분쟁 보고서'],
+['m',19,'경찰의 폭력','젊은 남성들이 경찰 특수부대에 이유 없이 체포되고 고문당한 일이 보고됐습니다. 2020년 #EndSARS 시위는 이에 맞선 청년들의 목소리였습니다.','2020년','경찰 폭력에 항의한 #EndSARS 시위',16,5,'국제앰네스티 · UN 고문방지위원회'],
+['a',25,'빈곤의 굴레','아프리카 최대 산유국이지만 국민 10명 중 4명이 국가 빈곤선 아래에 삽니다. 깨끗한 물, 전기, 병원은 먼 이야기일 수 있습니다.','약 40%','국가 빈곤선 아래 인구 (2018–19)',1,25,'세계은행 · 나이지리아 통계청']]},
+{id:'PAK',n:'파키스탄',w:5.2,le:[65.4,69.6],u5:59,ur:38,city:['카라치','라호르'],nm:{m:['아흐메드','빌랄','하산','우스만'],f:['아이샤','파티마','자이납','마리암']},sn:['칸','말리크','후세인','부트'],is:[
+['f',8,'닫힌 교실 문','파키스탄은 세계에서 학교 밖 아동이 가장 많은 나라 중 하나이고, 그중 절반 이상이 여자아이입니다.','2,500만 명+','학교에 다니지 않는 5~16세 아동 (2025)',4,26,'파키스탄 교육연구소(PIE) 2025 · UNICEF'],
+['f',17,'이른 결혼','가족이 정한 상대와 일찍 결혼하는 일이 여전히 흔합니다. 법정 혼인 연령도 지역마다 다릅니다.','18%','20~24세 여성 중 18세 전에 결혼한 비율',5,16,'UNICEF'],
+['f',21,'‘명예’라는 이름의 폭력','가족이 반대하는 결혼을 하거나 정해진 결혼을 거부했다는 이유로 가족에게 살해되는 ‘명예살인’이 해마다 수백 건 보고됩니다.','수백 건','매년 보고되는 명예살인 (실제는 더 많을 것으로 추정)',5,3,'파키스탄 인권위원회(HRCP) · UN 여성폭력 특별보고관'],
+['m',9,'벽돌 가마의 빚','가족이 진 빚을 갚으려고 온 가족이 벽돌 가마에서 일하는 채무노동이 대를 이어 계속되기도 합니다.','약 230만 명','현대판 노예 상태에 놓인 것으로 추정되는 인구',8,4,'워크프리재단 세계노예지수 2023 · ILO'],
+['a',20,'종교가 위험이 될 때','신성모독법 때문에 말 한마디나 SNS 게시물로 사형이 선고될 수 있고, 고발만으로 군중 폭력의 표적이 됩니다. 기독교인, 아마디야 등 종교적 소수자에게 특히 위험합니다.','사형','신성모독죄에 규정된 최고형',16,18,'UN 종교의자유 특별보고관 · 파키스탄 인권위원회'],
+['m',24,'사라진 사람들','발루치스탄 등에서는 정부를 비판하거나 의심받은 남성이 영장 없이 끌려가 소식이 끊기는 강제실종이 이어집니다.','1만 600건+','실종조사위원회에 접수된 강제실종 사건 (2011~2025.9 누적)',16,9,'UN 강제실종 실무그룹 · 파키스탄 실종조사위원회']]},
+{id:'IDN',n:'인도네시아',w:3.4,le:[69.0,73.4],u5:21,ur:58,city:['자카르타','수라바야'],nm:{m:['부디','리즈키','아구스','데디'],f:['시티','데위','푸트리','누르'],},sn:['산토소','위자야','프라타마','하르토노'],is:[
+['f',0,'아기 때 이뤄지는 할례','여자 아기에게 할례(P2GP)를 하는 관행이 넓게 남아 있습니다. 2024년 정부령으로 금지됐지만 현장에서는 아직 사라지지 않았습니다.','약 50%','11세 이하 여아 중 할례를 겪은 비율 (2013 조사)',5,5,'UNICEF · 인도네시아 기초보건조사 2013','아기일 때'],
+['f',17,'이른 결혼','2019년 혼인 연령을 19세로 올렸지만, 법원의 혼인 허가로 미성년 결혼이 계속됩니다.','약 10%','20~24세 여성 중 18세 전에 결혼한 비율',5,16,'UNICEF · 인도네시아 통계청(BPS)'],
+['m',11,'담배밭의 아이들','담배 농장에서 일하는 아이들은 젖은 담뱃잎을 맨손으로 다루며 니코틴에 중독되고 농약에 노출됩니다.','니코틴 중독','담배밭에서 일하는 아이들에게 보고된 증상',8,4,'휴먼라이츠워치 〈The Harvest is in My Blood〉 2016'],
+['m',20,'바다 위의 강제노동','원양어선에 취업한 젊은 남성들이 여권을 빼앗기고 임금 없이 장시간 일하는 사례가 반복해서 보고됩니다.','하루 18시간+','피해 어선원들이 증언한 노동 시간 (일부 사례)',8,4,'ILO · 국제 인권단체 원양어업 조사'],
+['a',25,'쇠사슬에 묶인 사람들','정신장애가 있는 사람을 가족이 쇠사슬로 묶거나 방에 가두는 ‘파숭’ 관행이 남아 있습니다. 치료받을 곳이 부족하기 때문입니다.','1만 명+','파숭 상태에 놓였던 것으로 확인된 사람',3,5,'휴먼라이츠워치 〈Living in Hell〉 2016 · 인도네시아 보건부']]},
+{id:'COD',n:'콩고민주공화국',w:3.3,le:[59.0,63.0],u5:73,ur:47,city:['킨샤사','고마'],nm:{m:['장피에르','파트리스','조엘','디외도네'],f:['그라스','에스페랑스','셰키나','프리시유']},sn:['일룽가','카봉고','므웨제','칼롬바'],is:[
+['f',14,'전쟁의 무기가 된 성폭력','동부 분쟁 지역에서는 무장단체가 여성과 소녀를 향한 성폭력을 전쟁의 무기로 씁니다. 피해자는 치료와 정의 모두에서 멀어집니다.','수만 건','해마다 보고되는 젠더기반폭력 사례',5,5,'UN 사무총장 분쟁하 성폭력 보고서 · UNFPA'],
+['m',12,'소년병','무장단체는 마을의 소년들을 강제로 끌고 가 전투원, 짐꾼, 정찰병으로 씁니다.','수천 명','UN이 확인한 무장단체의 아동 징집·이용 (최근 연간)',16,4,'UN 사무총장 아동과 무력분쟁 보고서'],
+['a',10,'코발트 광산','스마트폰과 전기차 배터리에 들어가는 코발트를 캐려고 아이들이 보호장비 없이 광산에서 일합니다.','약 4만 명','남부 광산 지역에서 일하는 것으로 추정된 아동 (2014)',8,4,'UNICEF 추정 · 국제앰네스티 〈This is what we die for〉 2016'],
+['a',5,'피란길의 어린 시절','반복되는 무력 충돌로 수백만 명이 집을 떠나 캠프에서 살아갑니다. 캠프에는 물, 음식, 학교가 늘 부족합니다.','600만 명+','국내 실향민 (2026)',16,13,'UN 콩고민주공화국 안정화임무단(MONUSCO) · UNHCR']]},
+{id:'ETH',n:'에티오피아',w:3.1,le:[64.1,69.8],u5:47,ur:23,city:['아디스아바바','바히르다르'],nm:{m:['아베베','다윗','요나스','테스파예'],f:['메스케렘','하나','티게스트','셀람']},sn:['게브레','알레무','하일레','타데세'],is:[
+['f',4,'여성 할례','여성 성기 훼손이 법으로 금지돼 있지만, 많은 지역에서 여전히 어린 시절에 행해집니다.','65%','15~49세 여성 중 할례를 겪은 비율',5,5,'UNICEF · 에티오피아 인구보건조사 2016','어린 시절'],
+['f',15,'이른 결혼','농촌 여자아이는 학교를 마치기 전에 결혼하는 경우가 많습니다. 정부가 조혼을 없애겠다고 약속했지만 갈 길이 멉니다.','40%','20~24세 여성 중 18세 전에 결혼한 비율',5,16,'UNICEF'],
+['m',18,'자의적 체포','분쟁 지역에서는 특정 민족이라는 이유로 젊은 남성들이 대거 체포·구금된 일이 보고됐습니다.','수천 명','2023년 비상사태 이후 구금된 것으로 보고된 인원',16,9,'UN 인권최고대표사무소 · 에티오피아 인권위원회'],
+['a',7,'분쟁 한가운데','티그라이, 암하라, 오로미아의 무력 충돌은 민간인 살해와 성폭력, 기근을 낳았습니다.','수백만 명','분쟁과 가뭄으로 집을 떠난 국내 실향민',16,3,'UN 인권최고대표사무소·에티오피아 인권위원회 공동조사(2021) · IOM'],
+['m',20,'위험한 이주의 길','일자리를 찾아 예멘을 거쳐 사우디아라비아로 가는 ‘동부 경로’에서 많은 청년이 폭력과 죽음을 겪습니다.','수십만 명','해마다 동부 경로를 지나는 이주민 (대부분 에티오피아인)',10,13,'IOM · 휴먼라이츠워치 2023']]},
+{id:'USA',n:'미국',w:2.8,le:[75.8,81.1],u5:6,ur:83,city:['휴스턴','시카고'],nm:{m:['제임스','리엄','노아','마테오'],f:['올리비아','에마','에이바','소피아']},sn:['존슨','윌리엄스','가르시아','스미스'],is:[
+['f',28,'출산이 위험한 이유','미국은 부유한 나라 가운데 모성사망률이 가장 높은 편이고, 흑인 여성은 백인 여성보다 출산 중 사망 위험이 훨씬 큽니다.','2.6배','흑인 여성의 모성사망률 ÷ 백인 여성 (2021)',3,25,'미국 질병통제예방센터(CDC) · UN 인종차별철폐위원회'],
+['f',19,'사는 주에 따라 달라지는 권리','2022년 연방대법원 판결 이후 여러 주가 임신중지를 거의 전면 금지했습니다. 어느 주에 사느냐에 따라 자기 몸에 대한 결정권이 달라집니다.','13개 주','임신중지를 전면 금지한 주 (2026)',5,3,'UN 여성차별 실무그룹 · UN 인권전문가 성명 2022'],
+['a',12,'교실의 총','2020년 이후 총기는 미국 아동·청소년 사망 원인 1위입니다. 아이들은 학교에서 총격 대피 훈련을 받으며 자랍니다.','1위','1~19세 사망 원인 중 총기 (2020년 이후)',16,3,'CDC · UN 자유권위원회 최종견해'],
+['m',20,'세계에서 가장 큰 감옥','미국은 수감률이 세계에서 가장 높은 나라 중 하나입니다. 가난하거나 흑인·라틴계 남성이라면 감옥에 갈 가능성이 훨씬 큽니다.','약 190만 명','교정시설 수감자',16,7,'World Prison Brief · UN 자유권위원회'],
+['a',30,'아프면 생기는 빚','전 국민 건강보험이 없어, 보험이 없거나 부족하면 병원비가 큰 빚이 됩니다.','2,670만 명','1년 내내 건강보험이 없었던 사람 (2025)',3,25,'미국 인구조사국 2026']]},
+{id:'BGD',n:'방글라데시',w:2.6,le:[72.3,76.0],u5:29,ur:40,city:['다카','치타공'],nm:{m:['라피크','타리크','아리프','사키브'],f:['파르비나','누스랏','타슬리마','루마나']},sn:['호사인','이슬람','라만','아흐메드'],is:[
+['f',15,'열다섯의 결혼','방글라데시는 세계에서 조혼율이 가장 높은 나라 중 하나입니다. 가난과 성폭력에 대한 두려움이 이른 결혼을 부추깁니다.','51%','20~24세 여성 중 18세 전에 결혼한 비율',5,16,'UNICEF'],
+['f',18,'의류 공장의 하루','세계로 수출되는 옷을 만드는 노동자 대부분이 젊은 여성입니다. 낮은 임금, 장시간 노동, 안전하지 않은 건물이 문제입니다.','1,134명','라나플라자 건물 붕괴 사망자 (2013)',8,23,'ILO · 클린클로즈캠페인'],
+['m',10,'일하는 아이','가난한 가정의 남자아이는 공장, 정비소, 시장에서 일하며 학교를 떠납니다.','178만 명','아동노동에 놓인 아동 (2022)',8,4,'방글라데시 통계청 아동노동조사 2022 · ILO'],
+['m',24,'바다 건너 일터','중동과 동남아시아로 일하러 떠나는 젊은 남성들은 높은 알선 수수료와 빚, 열악한 노동조건을 겪기도 합니다.','연 100만 명+','해외로 일하러 떠나는 노동자 (2023)',8,23,'IOM · ILO'],
+['a',6,'물에 잠기는 집','홍수, 사이클론, 해수면 상승으로 집과 농지를 잃는 일이 잦아지고 있습니다. 기후위기는 가장 가난한 사람들에게 먼저 닥칩니다.','1,900만 명','기후·환경 재해 위험에 놓인 아동',13,25,'UNICEF 〈A Gathering Storm〉 2019']]},
+{id:'BRA',n:'브라질',w:1.9,le:[72.6,79.0],u5:14,ur:88,city:['상파울루','리우데자네이루'],nm:{m:['가브리엘','루카스','미겔','아르투르'],f:['마리아','줄리아','헬레나','알리시'],},sn:['실바','산투스','올리베이라','소자'],is:[
+['f',25,'여성이라서 살해당하는 일','여성이라는 이유로, 대개 배우자나 전 배우자에게 살해되는 ‘페미사이드’가 하루 평균 네 건꼴로 일어납니다.','1,571건','한 해 페미사이드 피해자 (2025, 집계 이후 최다)',5,3,'브라질 공공안전포럼 연감 2026 · UN Women'],
+['f',16,'남의 집 부엌에서','가사노동자 대부분이 흑인 여성이며, 많은 수가 어린 나이에 일을 시작하고 근로계약 없이 일합니다.','약 90%','가사노동자 중 여성 비율',8,23,'ILO · 브라질 지리통계원(IBGE)'],
+['m',17,'경찰의 총','경찰 개입으로 숨지는 사람이 해마다 6천 명을 넘고, 희생자 대다수는 빈민가에 사는 젊은 흑인 남성입니다.','6,000명+','해마다 경찰 개입으로 숨지는 사람 (2023~2025)',16,3,'브라질 공공안전포럼 · UN 인종차별철폐위원회'],
+['m',22,'노예와 같은 노동','농장과 공사장에서 노예와 같은 조건으로 일하다 구조되는 노동자가 해마다 수천 명에 이릅니다.','3,190명','‘노예와 유사한 노동’에서 구조된 노동자 (2023)',8,4,'브라질 노동고용부 · ILO'],
+['a',8,'피부색이 가르는 기회','흑인과 혼혈 브라질 사람은 소득, 교육, 안전 모든 면에서 불리합니다. 원주민 공동체는 땅과 생존을 위협받습니다.','약 77%','살인 피해자 중 흑인·혼혈 비율',10,2,'브라질 응용경제연구소(IPEA) 폭력지도 · UN 원주민 권리 특별보고관']]},
+{id:'EGY',n:'이집트',w:1.6,le:[68.0,72.6],u5:19,ur:43,city:['카이로','알렉산드리아'],nm:{m:['모하메드','오마르','유세프','카림'],f:['누르','마리암','살마','하비바']},sn:['하산','압델라흐만','마흐무드','이브라힘'],is:[
+['f',9,'여성 할례','여성 성기 훼손이 2008년 금지되고 2021년 처벌이 강화됐지만, 여전히 대다수 여성이 겪습니다. 의사가 시술하는 경우도 많습니다.','약 87%','15~49세 여성 중 할례를 겪은 비율',5,5,'UNICEF · 이집트 가족건강조사 2021'],
+['f',17,'이른 결혼','농촌과 남부 지역에서는 18세 전 비공식 결혼이 이어지고, 등록되지 않은 결혼은 법의 보호도 받지 못합니다.','17%','20~24세 여성 중 18세 전에 결혼한 비율',5,16,'UNICEF'],
+['m',12,'학교 대신 일터로','가난한 가정의 남자아이는 농장, 채석장, 작업장에서 일하며 학교를 떠나기도 합니다.','약 160만 명','일하는 아동 (2010 조사)',8,4,'ILO · 이집트 통계청 아동노동조사'],
+['a',20,'비판하면 감옥으로','정부를 비판한 언론인, 활동가, SNS 사용자가 ‘테러’ 혐의로 오랫동안 재판 전 구금되는 일이 많습니다.','수만 명','정치적 이유로 구금된 것으로 추정되는 사람',16,19,'휴먼라이츠워치 · UN 자의적구금 실무그룹'],
+['a',30,'오르는 빵값','물가가 크게 오르면서 국민 셋 중 한 명가량이 빈곤선 아래에서 살아갑니다.','약 30%','국가 빈곤선 아래 인구 (2019/20)',1,25,'이집트 통계청 · 세계은행']]},
+{id:'PHL',n:'필리핀',w:1.4,le:[67.8,74.0],u5:26,ur:48,city:['케손시티','세부'],nm:{m:['호세','마크','라파엘','존폴'],f:['마리아','제니','크리스틴','앤젤리카']},sn:['산토스','레예스','크루스','바우티스타'],is:[
+['f',30,'이혼할 수 없는 나라','필리핀은 바티칸과 함께 이혼 제도가 없는 단 두 곳 중 하나입니다. 폭력적인 결혼에서 벗어나는 길이 매우 좁습니다.','2곳','이혼 제도가 없는 국가 (필리핀·바티칸)',5,16,'UN 여성차별철폐위원회 최종견해'],
+['m',19,'‘마약과의 전쟁’','2016년부터 이어진 마약 단속에서 재판 없이 수천 명이 사살됐고, 대부분 가난한 동네의 남성이었습니다. 2025년 전 대통령이 국제형사재판소로 넘겨졌습니다.','6,000명+','정부가 인정한 단속 중 사망자 (인권단체 추정은 최대 3만 명)',16,3,'UN 인권최고대표사무소 보고서 2020 · 국제형사재판소'],
+['a',9,'화면 너머의 착취','가난한 가정의 아이들이 돈을 받고 온라인 성착취 영상에 이용되는 일이 세계에서 가장 많이 보고되는 나라 중 하나입니다.','약 50만 명','2022년 온라인 성착취에 이용된 아동 (추정)',16,3,'IJM·노팅엄대 〈Scale of Harm〉 2023 · UNICEF'],
+['m',25,'바다 건너 일터','해외 이주노동자로 떠난 남성들은 가족과 떨어져 살며 임금 체불과 학대의 위험을 감수합니다.','약 200만 명','해외에서 일하는 필리핀 노동자 (2023)',8,23,'필리핀 통계청 · ILO'],
+['a',4,'더 강해지는 태풍','해마다 20개 안팎의 태풍이 지나갑니다. 집이 무너질 때마다 가난한 가정은 처음부터 다시 시작해야 합니다.','약 20개','해마다 필리핀 관할 해역에 들어오는 태풍',13,25,'필리핀 기상청(PAGASA) · UNICEF']]},
+{id:'TZA',n:'탄자니아',w:1.6,le:[65.0,69.2],u5:41,ur:37,city:['다르에스살람','므완자'],nm:{m:['바라카','줌마','하미시','엘리아스'],f:['네마','에스터','자와디','하디자']},sn:['음와카','음바세','셰자','키몰로'],is:[
+['f',15,'이른 결혼','법원이 미성년 결혼을 허용하는 조항을 문제 삼았지만, 관습에 따라 여전히 어린 나이에 결혼하는 일이 많습니다.','31%','20~24세 여성 중 18세 전에 결혼한 비율',5,16,'UNICEF'],
+['f',16,'임신하면 쫓겨나던 학교','임신한 여학생을 퇴학시키던 정책은 2021년에야 폐지됐습니다. 복학할 수 있게 됐지만 편견과 육아 부담은 여전합니다.','2021년','임신한 여학생의 복학 금지 정책 폐지',4,26,'휴먼라이츠워치 · UN 아동권리위원회'],
+['m',11,'금광의 아이들','소규모 금광에서 아이들이 갱도에 들어가고, 금을 뽑아내는 수은을 맨손으로 다룹니다.','수은 중독','금 추출에 쓰는 수은이 아이들에게 남기는 위험',8,4,'휴먼라이츠워치 〈Toxic Toil〉 2013 · ILO'],
+['a',7,'회초리가 있는 교실','학교 체벌이 법으로 허용돼 있어 많은 아이들이 교실에서 매를 맞습니다.','합법','학교 체벌의 법적 지위',4,5,'UN 아동권리위원회 · 아동체벌근절 글로벌 파트너십'],
+['a',22,'목소리를 내기 어려운 사회','야당 정치인과 언론, 시민단체에 대한 압박이 커지고, 선거 때마다 체포와 폭력이 보고됩니다.','체포·실종','비판자에게 보고된 일',16,19,'UN 인권최고대표사무소 · 국제앰네스티']]},
+{id:'MEX',n:'멕시코',w:1.4,le:[72.0,78.4],u5:13,ur:81,city:['멕시코시티','과달라하라'],nm:{m:['산티아고','마테오','레오나르도','에밀리아노'],f:['소피아','레히나','발렌티나','히메나']},sn:['에르난데스','가르시아','마르티네스','로페스'],is:[
+['f',22,'하루 일곱 명','정부 통계로도 하루 평균 일곱 명꼴로 여성이 살해되고, 시민단체는 실제로는 열 명에 가깝다고 봅니다. 여성살해(페미사이드)로 수사되는 사건은 그중 일부이고, 대부분 처벌되지 않습니다.','하루 약 7명','살해된 여성 (2025, 정부 집계)',5,3,'멕시코 국가공공안전시스템(SESNSP) · UN 여성차별철폐위원회 제출 보고서'],
+['m',14,'조직범죄의 손짓','카르텔은 가난한 동네의 십대 소년들을 망보기, 운반책, 조직원으로 끌어들입니다. 거절하는 것조차 위험할 수 있습니다.','3만 명+','범죄조직에 가담한 것으로 추정되는 아동·청소년',16,3,'멕시코 아동권리네트워크(REDIM) · UNICEF'],
+['a',20,'사라진 사람들','10만 명이 넘는 사람이 실종돼, 가족들이 직접 땅을 파며 찾고 있습니다.','13만 명+','국가 실종자 등록부에 오른 사람 (2025)',16,3,'UN 강제실종위원회 · 멕시코 국가실종자등록부'],
+['a',6,'원주민으로 태어난다면','원주민 공동체 아이들은 빈곤율이 훨씬 높고, 모국어로 교육받을 기회가 부족합니다.','65%','원주민 인구 중 빈곤층 비율 (2022)',10,2,'멕시코 사회개발정책평가위원회(CONEVAL)']]},
+{id:'AFG',n:'아프가니스탄',w:1.1,le:[63.6,68.3],u5:55,ur:26,city:['카불','헤라트'],nm:{m:['아흐마드','마흐무드','파르하드','와히드'],f:['파리스타','마리암','소마야','자흐라']},sn:['아흐마디','하이다리','라히미','사디키'],is:[
+['f',12,'초등학교가 마지막 교실','2021년 이후 여자아이는 초등학교 6학년까지만 다닐 수 있습니다. 중·고등학교와 대학의 문이 모두 닫혔습니다.','약 240만 명','중등교육에서 배제된 여자아이 (2026)',4,26,'UNESCO 2026 · UN 아프가니스탄 지원단(UNAMA)'],
+['f',18,'목소리마저 금지된 삶','2024년 법은 여성이 공공장소에서 목소리를 내는 것까지 금지했습니다. 남성 보호자 없이 먼 길을 갈 수 없고 대부분의 일자리가 막혀 있습니다.','‘젠더 아파르트헤이트’','UN 특별보고관이 이 상황을 부른 말',5,2,'UN 아프가니스탄 인권 특별보고관 · UN Women'],
+['f',20,'출산의 위험','여성 의료인을 길러낼 길이 막히고 병원도 멀어, 출산 중 숨질 위험이 매우 큽니다.','620명','출생 10만 명당 모성사망 (2020)',3,25,'WHO·UNICEF·UNFPA·세계은행 모성사망 추정 2023'],
+['m',20,'공개 태형','공개 태형과 처벌이 다시 집행되고 있습니다. 표현과 옷차림, 수염까지 규제 대상입니다.','수백 명','UNAMA가 기록한 공개 체벌 대상자 (2023~)',16,5,'UN 아프가니스탄 지원단(UNAMA) 인권보고서'],
+['a',5,'굶주림','인구 셋 중 한 명가량이 심각한 식량 불안을 겪고, 많은 아이가 급성 영양실조 상태입니다.','약 3분의 1','심각한 식량 불안을 겪는 인구',2,25,'WFP · 통합식량안보단계분류(IPC)'],
+['a',10,'돌아온 사람들','이란과 파키스탄에서 강제로 돌려보내진 수백만 명이 집도 일자리도 없는 곳에서 다시 시작해야 합니다.','수백만 명','2023년 이후 이란·파키스탄에서 돌아온 사람',10,13,'UNHCR · IOM']]},
+{id:'KEN',n:'케냐',w:1.1,le:[60.0,65.5],u5:39,ur:29,city:['나이로비','몸바사'],nm:{m:['와풀라','키마니','브라이언','데니스'],f:['와안지루','아키니','페이스','머시']},sn:['오티에노','음왕기','키베트','오몬디'],is:[
+['f',13,'여성 할례','2011년 법으로 금지됐지만, 일부 공동체에서는 국경을 넘어가서까지 할례를 합니다.','15%','15~49세 여성 중 할례를 겪은 비율 (2022)',5,5,'케냐 인구보건조사 2022 · UNICEF'],
+['f',24,'멈추지 않는 여성살해','2024년 여성살해 사건이 잇따르면서 전국에서 항의 행진이 열렸습니다. 가해자 대부분은 피해자가 아는 사람입니다.','2024년','여성살해에 항의하는 전국 행진',5,3,'UN Women · 케냐 국가인권위원회'],
+['m',22,'시위와 강제실종','2024년 청년 세대의 세금 반대 시위에서 경찰 발포로 수십 명이 숨지고, 정부 비판자들이 납치·실종됐습니다.','60명+','2024년 시위 관련 사망자 (케냐 국가인권위원회)',16,20,'케냐 국가인권위원회(KNCHR) · UN 인권최고대표사무소'],
+['a',6,'가뭄','기후위기로 가뭄이 길어지면서 북부 목축 지역 아이들이 영양실조와 학업 중단을 겪습니다.','5번','2020~2023년 연속으로 실패한 우기',13,25,'UNICEF · WFP'],
+['a',15,'판자촌의 삶','나이로비 인구 상당수가 수도와 화장실이 부족한 비공식 정착촌에 삽니다. 강제 철거도 잦습니다.','약 60%','비공식 정착촌에 사는 나이로비 인구 (추정)',11,25,'UN-Habitat · UN 적절한 주거권 특별보고관']]},
+{id:'SDN',n:'수단',w:1.2,le:[63.0,68.5],u5:50,ur:36,city:['포트수단','카르툼'],nm:{m:['아흐메드','모하메드','오스만','야시르'],f:['아말','파티마','히바','삼라']},sn:['압달라','엘타이브','오스만','하산'],is:[
+['f',14,'전쟁 속 성폭력','2023년 4월 시작된 내전에서 여성과 소녀를 향한 성폭력이 광범위하게 저질러졌습니다.','‘광범위’','UN 진상조사단이 판단한 성폭력 규모',5,5,'UN 수단 진상조사단 보고서 2024'],
+['f',6,'여성 할례','수단은 할례율이 세계에서 가장 높은 나라 중 하나입니다. 2020년에야 범죄로 규정됐습니다.','87%','15~49세 여성 중 할례를 겪은 비율',5,5,'UNICEF','어린 시절'],
+['m',15,'끌려가는 소년들','교전 양측이 소년과 청년을 강제로 징집하고 있으며, 특정 민족이라는 이유로 남성들이 살해되기도 했습니다.','다수 확인','UN이 확인한 아동 징집·이용 사례',16,4,'UN 사무총장 아동과 무력분쟁 보고서 · UN 수단 진상조사단'],
+['a',2,'세계에서 가장 큰 피란','수단은 세계 최대 규모의 실향 위기를 겪고 있습니다. 일부는 고향으로 돌아갔지만, 여전히 수백만 명의 아이들이 학교도 병원도 없이 지냅니다.','1,400만 명','전쟁 이후 집을 떠나야 했던 사람 (국내외, 2025년 10월)',16,13,'UNHCR 2026 · IOM'],
+['a',4,'기근','일부 지역에서 공식적으로 기근이 확인됐습니다. 영양실조는 어린아이에게 가장 먼저 찾아옵니다.','2024년','IPC가 수단 일부 지역의 기근을 확인한 해',2,25,'통합식량안보단계분류(IPC) 기근검토위원회']]},
+{id:'UGA',n:'우간다',w:1.2,le:[65.0,70.0],u5:39,ur:26,city:['캄팔라','굴루'],nm:{m:['존','오켈로','이삭','로널드'],f:['나카토','아케요','그레이스','프리스카']},sn:['세기라','와수와','오포리','키울라'],is:[
+['f',16,'이른 결혼과 임신','여자아이 셋 중 한 명이 18세 전에 결혼하고, 10대 임신으로 학교를 떠나는 경우가 많습니다.','34%','20~24세 여성 중 18세 전에 결혼한 비율',5,16,'UNICEF · 우간다 인구보건조사'],
+['m',23,'군사법원에 선 민간인','야당 지지자와 비판자가 군사법원에서 재판받아 왔습니다. 2025년 1월 대법원이 이를 위헌이라 판결했지만, 같은 해 6월 법 개정으로 다시 허용됐습니다. 구금 중 고문도 보고됩니다.','2025년','군사법원의 민간인 재판을 다시 허용한 법 개정',16,10,'UN 고문방지위원회 · 휴먼라이츠워치'],
+['a',19,'사랑이 범죄가 될 때','2023년 반동성애법은 동성 관계에 최고 사형까지 규정했습니다. 성소수자로 자란다면 가족과 이웃에게조차 숨겨야 합니다.','사형','‘가중 동성애’에 규정된 최고형 (2023)',10,2,'UN 인권최고대표 성명 2023 · UN 성적지향·성별정체성 독립전문가'],
+['a',10,'일하는 아이들','농촌 아이들은 농사, 가사노동, 채석장 일로 학교를 빠지는 일이 잦습니다.','농업','아동노동이 가장 많이 일어나는 분야',8,4,'ILO · 우간다 통계청']]},
+{id:'VNM',n:'베트남',w:1.0,le:[70.0,79.0],u5:20,ur:39,city:['호찌민','하노이'],ff:1,sp:1,nm:{m:['반안','득민','꾸옥후이','민꽝'],f:['티흐엉','응옥안','투하','꾸인안']},sn:['응우옌','쩐','레','팜'],is:[
+['f',0,'태어나기 전의 선택','아들을 선호하는 문화 탓에 성감별 낙태가 이어져, 출생 성비가 자연 수준보다 크게 높습니다.','111.5','여아 100명당 남아 출생 수 (2019)',5,3,'UNFPA 베트남 · 2019년 인구주택총조사','태어나기 전'],
+['f',17,'국경 너머로 팔려가는 신부','북부 산간 소수민족 지역의 여성과 소녀가 일자리를 약속받고 국경을 넘었다가 강제 결혼으로 팔려가는 사례가 보고됩니다.','수천 건','적발된 인신매매 피해 (대부분 여성·아동, 누적)',5,4,'UNODC · 베트남 공안부'],
+['m',19,'‘재활’이라는 이름의 구금','마약 사용자로 지목된 사람들이 재판 없이 재활센터에 보내져 노동을 강요당한 사례가 보고됐습니다.','최대 2년','재판 없이 시설에 구금될 수 있었던 기간',3,9,'휴먼라이츠워치 · UN 자의적구금 실무그룹'],
+['a',20,'페이스북에 쓴 글','정부를 비판하는 글을 올린 블로거와 활동가가 ‘반국가 선전’ 혐의로 징역형을 받습니다.','최대 20년','형법 117조 ‘반국가 선전’의 최고형',16,19,'UN 자유권위원회 최종견해 · 국경없는기자회'],
+['a',22,'만들 수 없는 노동조합','공식 노동총연맹 밖에서는 독립적인 노동조합을 만들 수 없습니다.','1곳','허용된 전국 노동조합 조직',8,23,'ILO · UN 사회권위원회']]},
+{id:'RUS',n:'러시아',w:0.9,le:[67.0,78.4],u5:4,ur:75,city:['모스크바','노보시비르스크'],nm:{m:['알렉산드르','드미트리','막심','이반'],f:['안나','소피야','마리야','다리야']},sn:['이바노프','스미르노프','쿠즈네초프','포포프'],sf:['이바노바','스미르노바','쿠즈네초바','포포바'],is:[
+['f',25,'처벌이 줄어든 가정폭력','2017년 처음 저지른 가정폭력을 형사처벌에서 벌금형으로 바꾸면서 피해자 보호가 약해졌습니다.','2017년','첫 가정폭력의 비범죄화',5,5,'UN 여성차별철폐위원회 · 유럽인권재판소 판결'],
+['m',18,'전선으로','2022년 동원령 이후 많은 남성이 전쟁에 동원됐고, 수감자와 이주민까지 계약병으로 모집됐습니다. 양심적 병역거부는 사실상 어렵습니다.','30만 명','2022년 부분 동원령으로 소집된 인원 (정부 발표)',16,18,'UN 러시아 인권 특별보고관'],
+['a',16,'반전을 말하면','군을 ‘불신’하게 하거나 ‘허위 정보’를 퍼뜨렸다는 혐의로, 전쟁 반대 발언만으로 처벌받습니다.','최대 15년','군 관련 ‘허위 정보’ 유포죄 최고형',16,19,'UN 러시아 인권 특별보고관 · OVD-Info'],
+['a',19,'‘극단주의자’가 된 성소수자','2023년 대법원이 ‘국제 LGBT 운동’을 극단주의로 지정해, 무지개 상징만으로도 처벌받을 수 있습니다.','2023년','LGBT 운동의 ‘극단주의’ 지정',10,2,'UN 인권최고대표사무소 성명 · UN 러시아 인권 특별보고관']]},
+{id:'YEM',n:'예멘',w:0.7,le:[66.6,71.9],u5:60,ur:39,city:['사나','아덴'],nm:{m:['모하메드','압둘라','아흐메드','살레'],f:['파티마','아마트','사바','아르와']},sn:['알쿠바티','사이드','하일','알마크타리'],is:[
+['f',13,'열세 살 신부','예멘에는 법정 최저 혼인 연령이 없습니다. 전쟁과 가난 속에서 딸을 일찍 결혼시키는 가정이 늘었습니다.','약 32%','20~24세 여성 중 18세 전에 결혼한 비율',5,16,'UNICEF'],
+['f',20,'보호자 없이는 갈 수 없는 길','일부 지역에서는 여성이 남성 보호자(마흐람) 없이 이동하거나 일하는 것이 제한됩니다. 구호 활동을 하는 여성조차 발이 묶입니다.','마흐람','여성 이동에 요구되는 남성 보호자 동반',5,13,'UN 예멘 전문가 패널 · 휴먼라이츠워치'],
+['m',13,'소년병','무장세력은 학교와 여름캠프를 통해 소년들을 모집해 전선에 보냅니다.','수천 명','UN이 확인한 아동 징집·이용 (분쟁 기간 누적)',16,4,'UN 사무총장 아동과 무력분쟁 보고서'],
+['a',1,'세계 최악의 인도적 위기 중 하나','10년 넘게 이어진 전쟁으로 인구 절반 이상이 구호에 기대어 삽니다. 병원과 상하수도가 무너져 콜레라가 반복됩니다.','2,230만 명','인도적 지원이 필요한 사람 (2026)',16,25,'UN 인도주의업무조정국(OCHA) 2026'],
+['a',3,'영양실조','많은 어린아이가 급성 영양실조 상태에 놓여 있습니다.','220만 명','급성 영양실조 상태의 5세 미만 아동 (추정)',2,25,'UNICEF 예멘 · IPC']]},
+{id:'IRN',n:'이란',w:0.8,le:[75.0,79.5],u5:11,ur:77,city:['테헤란','마슈하드'],nm:{m:['아미르호세인','모함마드','알리','레자'],f:['파테메','자흐라','사라','헬리아']},sn:['모하마디','호세이니','아마디','레자에이'],is:[
+['f',9,'아홉 살부터 쓰는 히잡','학교에 들어가면 히잡 착용이 의무가 됩니다. 2022년 마흐사 아미니가 히잡 단속 중 숨진 뒤 ‘여성, 삶, 자유’ 시위가 일어났습니다.','2022년','‘여성, 삶, 자유’ 운동',5,2,'UN 이란 진상조사단 2024'],
+['f',20,'법이 정한 절반','법정에서 여성의 증언과 상속은 남성의 절반으로 인정되고, 결혼한 여성은 여권 발급과 해외여행에 남편 허락이 필요합니다.','1/2','여성 증언·상속의 법적 가치',5,7,'UN 여성차별 실무그룹 · UN 이란 인권 특별보고관'],
+['m',24,'끊이지 않는 사형','이란은 세계에서 사형 집행이 가장 많은 나라 중 하나이며, 마약 범죄나 시위 참가로도 사형이 집행됩니다. 소수민족 남성의 비율이 특히 높습니다.','1,639명+','2025년 사형 집행 (1989년 이후 최다, 이란인권 IHR 집계)',16,3,'UN 이란 인권 특별보고관 · 이란인권(IHR)'],
+['a',17,'감시되는 표현','인터넷과 SNS가 차단되고, 정부를 비판하거나 시위에 참여하면 체포와 고문을 당할 수 있습니다.','수만 명','2022년 시위 중 체포된 것으로 추정되는 사람',16,19,'UN 이란 진상조사단'],
+['a',12,'믿음이 다르다면','바하이교처럼 인정받지 못한 종교를 믿으면 대학 입학과 공직 진출이 막히고 재산을 빼앗기기도 합니다.','입학 거부','바하이 신자에게 반복되는 차별',10,18,'UN 이란 인권 특별보고관']]},
+{id:'TUR',n:'튀르키예',w:0.7,le:[75.5,81.0],u5:9,ur:77,city:['이스탄불','디야르바크르'],nm:{m:['유수프','에프레','외메르','무스타파'],f:['제이넵','엘리프','아스야','에미네']},sn:['이을마즈','카야','데미르','셰힌'],is:[
+['f',26,'떠나버린 보호 협약','튀르키예는 2021년 여성폭력 방지를 위한 이스탄불 협약에서 탈퇴했습니다. 여성살해가 해마다 수백 건 보고됩니다.','2021년','이스탄불 협약 탈퇴',5,3,'UN 여성차별철폐위원회 · 유럽평의회'],
+['f',16,'이른 결혼','동남부 지역을 중심으로 종교 의식만 치르는 미성년 결혼이 계속됩니다.','15%','20~24세 여성 중 18세 전에 결혼한 비율',5,16,'UNICEF'],
+['m',20,'거부할 수 없는 군복무','양심적 병역거부가 인정되지 않아, 거부하면 반복해서 처벌받고 사회생활이 막힙니다.','인정 안 됨','양심적 병역거부권',16,18,'유럽인권재판소 · UN 자유권위원회'],
+['a',22,'잡혀가는 기자들','언론인과 정치인, 시민이 ‘테러 선전’이나 ‘대통령 모욕’ 혐의로 구금되는 일이 잦습니다.','상위권','구금된 언론인 수 기준 세계 순위',16,19,'국경없는기자회 · 언론인보호위원회(CPJ)'],
+['a',7,'쿠르드어로 배운다면','쿠르드계 아이들은 공교육에서 모국어로 배울 기회가 제한되고, 정치적 차별을 겪기도 합니다.','5명 중 1명','튀르키예 인구 중 쿠르드계 (추정)',10,2,'UN 인종차별철폐위원회 최종견해']]},
+{id:'MMR',n:'미얀마',w:0.6,le:[64.0,70.5],u5:40,ur:32,city:['양곤','만달레이'],nm:{m:['아웅묘','초진','툰툰','예윈'],f:['에이에이','띤자','수모','누누']},sn:[],is:[
+['f',16,'군의 성폭력','군부는 소수민족 지역에서 성폭력을 공격 수단으로 써 왔고, 2021년 쿠데타 이후 더 넓은 지역으로 번졌습니다.','‘체계적’','UN 조사기구가 판단한 군의 성폭력',5,5,'UN 미얀마 독립조사메커니즘 · UN 미얀마 인권 특별보고관'],
+['m',18,'강제 징병','2024년 군부가 징병법을 시행하면서 젊은 남성들이 강제로 소집되고 있습니다. 징병을 피해 국경을 넘는 청년이 늘었습니다.','18~35세','징병 대상 남성 연령',16,13,'UN 미얀마 인권 특별보고관'],
+['m',22,'사기 단지에 갇히다','고수익 일자리 광고에 속은 청년들이 국경 지대 온라인 사기 단지에 갇혀, 폭행을 당하며 사기 범행을 강요받습니다.','12만 명','미얀마 사기 단지에 갇힌 것으로 추정된 사람 (2023)',8,4,'UN 인권최고대표사무소 보고서 2023'],
+['a',5,'공습을 피해','쿠데타 이후 이어진 공습과 전투로 수백만 명이 집을 잃었습니다. 학교와 병원도 공격받습니다.','370만 명+','국내 실향민 (2026)',16,13,'UNHCR 2026 · OCHA'],
+['a',1,'국적 없는 아이','로힝야로 태어난다면 국적을 인정받지 못하고 이동, 교육, 결혼까지 제한받습니다. 2017년 학살로 70만 명 넘게 방글라데시로 피란했습니다.','70만 명+','2017년 방글라데시로 피란한 로힝야',10,15,'UN 미얀마 진상조사단 2018 · UNHCR']]},
+{id:'NER',n:'니제르',w:0.8,le:[60.0,62.0],u5:113,ur:17,city:['니아메','진데르'],nm:{m:['이소푸','아마두','무사','하루나'],f:['하디자','아미나투','마이무나','라마투']},sn:['이수푸','마하마두','가르바','사니'],is:[
+['f',15,'세계에서 가장 이른 결혼','니제르는 조혼율이 세계에서 가장 높은 나라입니다. 많은 여자아이가 열다섯이 되기 전에 결혼합니다.','76%','20~24세 여성 중 18세 전에 결혼한 비율',5,16,'UNICEF'],
+['f',17,'출산이 목숨을 걸 때','이른 결혼과 잦은 임신, 부족한 의료 때문에 출산 중 숨지는 여성이 많습니다. 여성 한 명이 평균 6명 넘는 아이를 낳습니다.','약 6명','여성 1명당 평균 출생아 수',3,25,'UNFPA · WHO'],
+['m',16,'무장단체의 위협','사헬 지역 무장단체가 마을을 공격하고 소년과 청년을 조직원으로 끌어들입니다.','수십만 명','분쟁으로 집을 떠난 국내 실향민',16,3,'UN 사무총장 아동과 무력분쟁 보고서 · UNHCR'],
+['a',8,'대물림되는 노예 신분','노예제는 2003년에 범죄가 됐지만, 노예의 후손이라는 이유로 차별받고 ‘다섯 번째 아내(와하야)’로 팔려가는 관행의 흔적이 남아 있습니다.','2003년','노예제를 범죄로 규정한 해',10,4,'UN 현대판 노예제 특별보고관 · 반노예인터내셔널'],
+['a',3,'배고픈 계절','가뭄과 분쟁으로 수확 직전 ‘굶주림의 계절’이 반복되고, 많은 아이들의 성장이 멈춥니다.','5명 중 2명+','발육부진을 겪는 5세 미만 아동',2,25,'UNICEF · WFP']]},
+{id:'MLI',n:'말리',w:0.6,le:[59.0,62.0],u5:92,ur:46,city:['바마코','몹티'],nm:{m:['아마두','바카리','수마일라','무사'],f:['파투마타','아미나타','아와','마리암']},sn:['트라오레','쿨리발리','디아라','케이타'],is:[
+['f',3,'어린 시절의 할례','말리는 여성 할례율이 세계에서 가장 높은 나라 중 하나이며, 이를 금지하는 법이 아직 없습니다.','89%','15~49세 여성 중 할례를 겪은 비율',5,5,'UNICEF · 말리 인구보건조사 2018','어린 시절'],
+['f',16,'이른 결혼','여성 절반 이상이 18세 전에 결혼합니다.','54%','20~24세 여성 중 18세 전에 결혼한 비율',5,16,'UNICEF'],
+['m',11,'금을 캐는 아이','소규모 금광에서 일하는 아이들은 무너지는 갱도와 수은 중독의 위험에 놓여 있습니다.','2~4만 명','금광에서 일하는 것으로 추정된 아동 (2011)',8,4,'휴먼라이츠워치 〈A Poisonous Mix〉 2011'],
+['a',7,'닫힌 학교','무장단체의 위협과 분쟁으로 학교 2천 곳 넘게 문을 닫았고, 2025년에는 연료 봉쇄로 전국 수업이 멈추기도 했습니다.','2,300곳+','불안정으로 문을 닫은 학교 (2025년 12월)',4,26,'UN · UNICEF 말리'],
+['a',9,'노예의 후손','카예스 지역 등에서는 노예의 후손으로 여겨지는 사람들이 차별과 폭력, 강제노동을 겪습니다.','세습 노예제','UN 전문가들이 규탄한 관행',10,4,'UN 말리 인권 독립전문가 · UN 현대판 노예제 특별보고관']]},
+{id:'SOM',n:'소말리아',w:0.6,le:[54.0,58.5],u5:104,ur:47,city:['모가디슈','하르게이사'],nm:{m:['모하메드','압디','아흐메드','유수프'],f:['님코','하와','파르히야','사디아']},sn:['압디라흐만','하산','이스마일','파라'],is:[
+['f',5,'거의 모두가 겪는 할례','소말리아는 여성 할례율이 세계에서 가장 높습니다. 대부분 다섯 살에서 열 살 사이에 겪습니다.','99%','15~49세 여성 중 할례를 겪은 비율',5,5,'소말리아 보건인구조사 2020 · UNICEF'],
+['f',15,'이른 결혼','가뭄과 빈곤 속에 신부값을 받으려고 딸을 일찍 결혼시키기도 합니다.','35%','20~24세 여성 중 18세 전에 결혼한 비율 (2020)',5,16,'소말리아 보건인구조사 2020 · UNFPA'],
+['m',13,'무장단체의 징집','무장단체 알샤바브는 소년들을 강제로 데려가 전투원으로 씁니다. UN이 확인한 아동 징집이 세계에서 가장 많은 나라 중 하나입니다.','세계 최다 수준','UN이 확인한 아동 징집 건수',16,4,'UN 사무총장 아동과 무력분쟁 보고서'],
+['a',2,'가뭄이 남긴 것','2022년 가뭄으로 약 4만 3천 명이 숨진 것으로 추정되며, 그 절반이 다섯 살 미만 아이였습니다.','4만 3천 명','2022년 가뭄으로 인한 초과 사망 (추정)',13,25,'UNICEF·WHO·런던위생열대의대 연구 2023'],
+['a',6,'캠프에서 자라는 아이','가뭄과 분쟁으로 수백만 명이 고향을 떠나 도시 외곽 캠프에서 강제 퇴거의 위협 속에 삽니다.','330만 명+','국내 실향민 (2026)',16,13,'UNHCR 2026 · IOM']]},
+{id:'SAU',n:'사우디아라비아',w:0.4,le:[76.0,79.5],u5:6,ur:85,city:['리야드','제다'],nm:{m:['압둘라','파이살','나세르','칼리드'],f:['누라','림','사라','라마']},sn:['알오타이비','알카타니','알하르비','알샴마리'],is:[
+['f',18,'남성 보호자 제도','2019년 일부 개혁이 있었지만, 여성이 결혼하려면 여전히 남성 보호자의 허락이 필요합니다.','2022년','후견 규정을 담은 개인지위법 제정',5,16,'UN 여성차별철폐위원회 · 휴먼라이츠워치'],
+['f',27,'트윗 한 줄의 대가','여성의 권리를 요구한 활동가들이 SNS 게시물 때문에 수십 년 징역형을 받은 사례가 있습니다.','34년','트윗을 이유로 한 여성에게 선고된 형량 (2022, 이후 감형·석방)',5,19,'UN 인권전문가 성명 · 국제앰네스티'],
+['m',30,'끊이지 않는 사형','사형 집행이 최근 역대 최다를 기록했고, 마약 범죄로 처형되는 남성이 많습니다.','356명','2025년 사형 집행 (역대 최다)',16,3,'AFP·휴먼라이츠워치 집계 · UN 인권전문가'],
+['a',20,'말할 수 없는 자유','정당과 독립 노동조합이 금지돼 있고, 정부 비판은 ‘테러’로 처벌받을 수 있습니다.','0개','합법적인 정당',16,19,'UN 인권이사회 보편적정례검토'],
+['a',10,'믿음의 자유','이슬람이 아닌 종교는 공개적으로 예배할 수 없습니다.','공개 예배 금지','비이슬람 종교에 대한 제한',10,18,'UN 종교의자유 특별보고관']]},
+{id:'JPN',n:'일본',w:0.55,le:[81.1,87.1],u5:2,ur:92,city:['도쿄','오사카'],ff:1,nm:{m:['하루토','렌','소타','미나토'],f:['유이','히마리','메이','쓰무기']},sn:['사토','스즈키','다카하시','다나카'],is:[
+['f',25,'성별 격차 117위','일본은 선진국 가운데 성별 격차가 가장 큰 나라에 속합니다. 여성 국회의원과 관리자 비율이 매우 낮고 임금 격차도 큽니다.','117위','세계경제포럼 성별격차지수 (145개국 중, 2026)',5,23,'세계경제포럼 2026 · UN 여성차별철폐위원회'],
+['f',29,'결혼하면 바뀌는 성','부부가 같은 성을 쓰도록 법으로 정해져 있어, 대부분 여성이 결혼하면서 자신의 성을 포기합니다. UN은 여러 차례 법 개정을 권고했습니다.','약 95%','결혼 후 남편의 성을 따르는 부부의 비율',5,16,'UN 여성차별철폐위원회 최종견해 2024'],
+['m',30,'일하다 죽는다는 말','‘과로사(카로시)’라는 말이 생길 만큼 장시간 노동이 이어지고, 과로로 인한 산재 인정도 해마다 나옵니다.','과로사','장시간 노동으로 인한 죽음을 가리키는 일본어',8,23,'ILO · 일본 후생노동성 과로사 백서'],
+['m',35,'‘인질 사법’','자백할 때까지 변호인 입회 없이 오랫동안 조사받을 수 있는 구금 제도로 비판받습니다.','23일','기소 전 최장 구금 기간',16,9,'UN 자유권위원회 · 휴먼라이츠워치'],
+['a',13,'아이들의 자살','청소년 자살이 줄지 않아, 2024년 초·중·고생 자살이 통계를 낸 이후 가장 많았습니다.','역대 최다','2024년 초·중·고생 자살자 수',3,3,'일본 후생노동성 · UN 아동권리위원회']]},
+{id:'DEU',n:'독일',w:0.5,le:[78.7,83.4],u5:4,ur:78,city:['베를린','함부르크'],nm:{m:['노아','마테오','레온','핀'],f:['에밀리아','소피아','한나','미아']},sn:['뮐러','슈미트','슈나이더','피셔'],is:[
+['f',30,'거의 매일 한 명','독일에서는 거의 매일 한 명의 여성이 현재 또는 전 배우자에게 살해됩니다.','360명','2023년 여성살해 피해자',5,3,'독일 연방범죄수사청(BKA) 2024 · UN Women'],
+['m',40,'혼자 견디는 남자','자살 사망자의 약 4분의 3이 남성이지만, 정신건강 도움을 요청하는 남성은 적습니다.','약 75%','자살 사망자 중 남성 비율',3,25,'독일 연방통계청'],
+['a',7,'다섯 명 중 한 명의 아이','부유한 나라에서도 아동 다섯 명 중 한 명가량이 빈곤 위험 속에서 자랍니다.','약 5명 중 1명','빈곤 위험에 놓인 아동',1,25,'독일 연방통계청 · UNICEF 보고서 카드'],
+['a',16,'혐오의 표적','이주 배경이 있거나 무슬림·유대인 가정의 아이라면 혐오 범죄와 차별을 겪을 가능성이 커집니다.','역대 최다','2024년 정치적 동기 범죄 건수',10,2,'독일 연방내무부 · UN 인종차별철폐위원회']]},
+{id:'GBR',n:'영국',w:0.5,le:[79.3,82.9],u5:4,ur:84,city:['런던','버밍엄'],nm:{m:['올리버','노아','조지','무하마드'],f:['올리비아','아멜리아','아일라','릴리']},sn:['스미스','존스','테일러','브라운'],is:[
+['f',20,'국가 비상사태라 불린 폭력','여성 대상 폭력이 너무 흔해 경찰이 이를 ‘국가적 비상사태’라고 불렀습니다.','12명 중 1명','해마다 여성폭력을 겪는 여성 (경찰 추정)',5,3,'영국 경찰청장협의회(NPCC) 2024'],
+['m',15,'불심검문','흑인 청소년은 백인보다 훨씬 자주 경찰의 불심검문을 받습니다.','약 4배','흑인이 백인보다 불심검문을 받는 비율 (2023/24)',10,2,'영국 내무부 · UN 인종차별철폐위원회'],
+['a',5,'세 명 중 한 명의 아이','아동 세 명 중 한 명 가까이가 상대적 빈곤 속에서 자랍니다.','430만 명','상대적 빈곤 속 아동 (2022/23)',1,25,'영국 노동연금부 · UN 아동권리위원회'],
+['a',3,'집이 없는 아이','지자체가 마련한 임시 숙소에서 사는 아이가 역대 최다를 기록했습니다.','17만 7천 명','임시 숙소에서 사는 잉글랜드 아동 (2026년 3월, 역대 최다)',11,25,'영국 주택부 2026 · UN 적절한 주거권 특별보고관']]},
+{id:'FRA',n:'프랑스',w:0.5,le:[79.9,85.7],u5:4,ur:82,city:['파리','마르세유'],nm:{m:['가브리엘','라파엘','루이','아담'],f:['자드','루이즈','앙브르','아리스']},sn:['마르탱','베르나르','뒤부아','토마'],is:[
+['f',28,'사흘에 한 명','프랑스에서는 사흘에 한 명꼴로 여성이 배우자나 전 배우자에게 살해됩니다.','약 100명','한 해 배우자에게 살해된 여성',5,3,'프랑스 내무부 · UN Women'],
+['f',15,'옷이 문제가 될 때','공립학교에서 히잡과 아바야 착용이 금지되면서, 무슬림 여학생들은 신앙과 교육 사이에서 선택을 강요받기도 합니다.','2023년','공립학교 아바야 착용 금지',10,18,'UN 자유권위원회 · UN 인권전문가 성명'],
+['m',16,'얼굴로 정해지는 검문','흑인이나 아랍계로 보이는 젊은 남성은 다른 사람보다 훨씬 자주 신분 검사를 받습니다.','20배','흑인·아랍계 청년 남성이 신분 검사를 받을 가능성 (2017)',10,2,'프랑스 권리보호관 2017 · UN 인종차별철폐위원회'],
+['a',6,'다섯 명 중 한 명의 아이','아동 다섯 명 중 한 명가량이 빈곤선 아래에서 자랍니다.','약 5명 중 1명','빈곤선 아래 아동',1,25,'프랑스 통계청(INSEE) · UNICEF 프랑스'],
+['a',4,'거리에서 자는 아이','매일 밤 2천 명 넘는 아이가 머물 곳 없이 거리나 차에서 잠듭니다.','2,000명+','거리에서 밤을 보내는 아동 (2024)',11,25,'UNICEF 프랑스·FAS 2024']]},
+{id:'GTM',n:'과테말라',w:0.3,le:[69.0,75.0],u5:22,ur:53,city:['과테말라시티','케찰테낭고'],nm:{m:['호세','후안','크리스티안','마리오'],f:['마리아','아나','히메나','로사']},sn:['로페스','가르시아','페레스','산체스'],is:[
+['f',13,'아이가 낳는 아이','10~14세 소녀의 출산이 해마다 수천 건에 이릅니다. 대부분 성폭력의 결과입니다.','수천 건','10~14세 소녀의 연간 출산',5,5,'과테말라 생식보건관측소(OSAR) · UNFPA'],
+['m',15,'갱단과 이주의 갈림길','갱단의 가입 압박과 가난 때문에 많은 소년이 홀로 미국으로 향하는 위험한 길에 나섭니다.','수만 명','해마다 미국 국경에서 붙잡히는 동반자 없는 과테말라 아동',16,13,'UNICEF · UNHCR'],
+['a',2,'자라지 못하는 아이','라틴아메리카에서 아동 발육부진율이 가장 높습니다. 원주민 농촌 지역 아이들은 절반 넘게 키가 제대로 자라지 못합니다.','약 47%','발육부진을 겪는 5세 미만 아동',2,25,'UNICEF 과테말라 · WFP'],
+['a',10,'원주민이라는 이유로','인구의 절반 가까이를 차지하는 마야 원주민은 빈곤과 차별, 토지 분쟁을 더 많이 겪습니다.','약 44%','원주민 인구 비율 (2018 인구조사)',10,2,'UN 원주민 권리 특별보고관 · 과테말라 통계청']]},
+{id:'HTI',n:'아이티',w:0.2,le:[61.0,66.5],u5:55,ur:59,city:['포르토프랭스','카프아이시앵'],nm:{m:['장','피에르','주니오르','미첼'],f:['마리','로즈','나탈리','소피']},sn:['장바티스트','피에르','조제프','샤를'],is:[
+['f',14,'갱단의 성폭력','갱단은 영역을 넓히는 수단으로 여성과 소녀에게 집단 성폭력을 저지릅니다.','수천 건','해마다 보고되는 젠더기반폭력',5,5,'UN 아이티 통합사무소(BINUH) · UNFPA'],
+['f',7,'남의 집 아이, 레스타벡','가난한 집 여자아이가 다른 집에 보내져 ‘레스타벡’으로 무급 가사노동을 하며 학대를 겪기도 합니다.','약 28만 명','가사노동에 놓인 아동 (2014 추정)',8,4,'UN 현대판 노예제 특별보고관 · UNICEF'],
+['m',12,'갱단에 끌려가는 소년','갱단 조직원 상당수가 아이들이며, 굶주림 때문에 스스로 들어가는 경우도 있습니다.','최대 50%','갱단원 중 아동의 비율 (UNICEF 추정)',16,4,'UNICEF 2024 · UN 아이티 통합사무소'],
+['a',1,'집을 잃은 사람들','갱단 폭력으로 150만 명 가까이 집을 떠났고, 그 절반가량이 아이들입니다.','약 150만 명','국내 실향민 (2026)',16,13,'IOM · UNICEF 2026'],
+['a',4,'굶주림','인구 절반가량이 심각한 식량 불안을 겪고 있습니다.','약 570만 명','심각한 식량 불안 인구 (2025)',2,25,'IPC · WFP']]},
+{id:'SYR',n:'시리아',w:0.4,le:[70.0,76.0],u5:21,ur:57,city:['다마스쿠스','알레포'],nm:{m:['아마드','오마르','사메르','카림'],f:['라나','누르','야라','라샤']},sn:['알할라비','하다드','하산','카바니'],is:[
+['f',15,'피란 속 이른 결혼','오랜 전쟁과 피란 생활 속에서 ‘보호’와 생계를 이유로 딸을 일찍 결혼시키는 가정이 늘었습니다.','증가','분쟁 이후 늘어난 조혼 (난민·실향민 사회)',5,16,'UNICEF · UNFPA'],
+['m',9,'땅속에 남은 전쟁','지뢰와 불발탄은 전쟁이 멈춘 뒤에도 남아, 양을 치거나 고철을 줍던 아이들의 목숨을 앗아갑니다.','세계 최다 수준','지뢰·불발탄 피해자 수',16,3,'랜드마인 모니터 · UNICEF 시리아'],
+['a',2,'무너진 삶의 기반','10년 넘는 전쟁 뒤 인구 대다수가 빈곤선 아래에 있고, 많은 사람이 구호에 기대어 삽니다.','1,560만 명','인도적 지원이 필요한 사람 (2026)',1,25,'UN OCHA 2026'],
+['a',18,'돌아오지 않는 가족','전쟁 동안 10만 명이 넘는 사람이 강제실종됐습니다. UN은 이들을 찾기 위한 독립기구를 만들었습니다.','10만 명+','행방을 알 수 없는 실종자',16,9,'UN 시리아 실종자 독립기구 · UN 시리아 조사위원회']]},
+{id:'UKR',n:'우크라이나',w:0.15,le:[68.0,78.0],u5:8,ur:70,city:['키이우','하르키우'],nm:{m:['올렉산드르','막심','아르템','드미트로'],f:['솔로미야','안나','마리야','소피야']},sn:['멜니크','셰우첸코','본다렌코','코발렌코'],is:[
+['f',20,'점령지의 성폭력','러시아군 점령 지역과 구금 시설에서 성폭력이 저질러진 사실이 UN 조사로 확인됐습니다.','전쟁범죄','UN 조사위원회가 내린 판단',5,5,'UN 우크라이나 독립국제조사위원회'],
+['m',18,'국경을 넘을 수 없는 남성','계엄령으로 18~60세 남성은 원칙적으로 출국할 수 없고, 동원 대상이 됩니다.','18~60세','출국이 제한된 남성 연령',16,13,'UN 우크라이나 인권감시단(HRMMU)'],
+['a',5,'공습 경보 속 어린 시절','미사일과 드론 공습으로 확인된 민간인 사망자만 1만 6천 명을 넘었습니다. 아이들은 지하 대피소에서 수업을 듣습니다.','1만 6천 명+','확인된 민간인 사망자 (2022년 2월~2026년 6월)',16,3,'UN 우크라이나 인권감시단(HRMMU) 2026'],
+['a',8,'끌려간 아이들','점령지의 우크라이나 아이들이 러시아로 이송됐고, 국제형사재판소는 이를 전쟁범죄로 보고 체포영장을 발부했습니다.','약 2만 명','우크라이나 정부가 확인한 이송 아동',16,13,'UN 우크라이나 조사위원회 · 국제형사재판소 2023']]},
+{id:'PSE',n:'팔레스타인',w:0.12,le:[63.0,68.0],u5:17,ur:77,city:['가자','헤브론'],nm:{m:['모하메드','아흐마드','유세프','아담'],f:['마리암','리안','누르','라날']},sn:['알나자르','나세르','아와드','사베르'],is:[
+['f',22,'안전하지 않은 출산','가자지구의 임신부들은 병원이 파괴된 상황에서 마취나 위생 없이 출산해야 하는 경우가 많았습니다.','5만 명+','2023년 10월 당시 가자지구의 임신부 (추정)',3,25,'UNFPA · WHO'],
+['m',15,'군사법원의 소년','서안지구 팔레스타인 소년들은 돌을 던졌다는 혐의 등으로 체포돼 군사법원에서 재판을 받습니다.','연 500~700명','군사법원에 기소되는 팔레스타인 아동 (추정)',16,10,'UNICEF · 세이브더칠드런'],
+['a',3,'아이들의 생명','2023년 10월 이후 가자지구 전쟁에서 수만 명의 아이가 죽거나 다쳤고, 2025년 10월 휴전 이후에도 아이들의 희생이 이어지고 있습니다.','6만 4천 명+','죽거나 다친 아동 (2023.10~2025.10, UNICEF)',16,3,'UNICEF · UN OCHA'],
+['a',1,'기근','2025년 8월 가자 일부 지역에서 공식적으로 기근이 확인됐습니다.','2025년','IPC가 가자시티 일대의 기근을 확인한 해',2,25,'통합식량안보단계분류(IPC) 2025']]},
+{id:'PRK',n:'북한',w:0.25,le:[69.0,75.0],u5:15,ur:63,city:['평양','함흥'],ff:1,nm:{m:['철민','광혁','성진','명수'],f:['은정','설향','옥순','혜련']},sn:['김','리','박','최'],is:[
+['f',20,'국경을 넘은 여성','탈북한 여성 다수가 중국에서 인신매매되어 강제 결혼이나 성착취를 당하고, 강제송환되면 구금과 폭력을 겪습니다.','약 70%','탈북민 중 여성 비율',5,4,'UN 인권최고대표사무소 〈I still feel the pain〉 2020 · 통일부'],
+['m',17,'10년의 군복무','남성은 10년 안팎 군복무를 해야 하며, 군 안에서 영양실조와 폭력이 보고됩니다.','약 10년','남성 군복무 기간',16,4,'UN 북한인권 특별보고관'],
+['a',10,'정치범수용소','가족 중 한 사람이 ‘반국가’로 지목되면 온 가족이 재판 없이 수용소로 보내질 수 있습니다. UN은 이를 인도에 반한 죄로 판단했습니다.','8만~12만 명','정치범수용소 수감자 추정 (2014)',16,9,'UN 북한인권조사위원회(COI) 2014'],
+['a',2,'배고픔','인구 절반 가까이가 영양 부족 상태인 것으로 추정됩니다.','약 45%','영양 부족 인구 비율 (2020–22)',2,25,'FAO 세계 식량안보·영양 현황 2023']]},
+{id:'KOR',n:'대한민국',w:0.18,le:[80.6,86.4],u5:3,ur:81,city:['서울','제주'],ff:1,nm:{m:['도윤','서준','하준','시우'],f:['서아','하윤','지안','이서']},sn:['김','이','박','최'],is:[
+['f',27,'같은 일, 다른 임금','한국은 OECD 회원국 가운데 성별 임금 격차가 가장 큰 나라입니다. 출산 뒤 경력이 끊기는 일도 흔합니다.','29%','성별 임금 격차, OECD 최고 (2024)',5,23,'OECD · UN 여성차별철폐위원회 최종견해 2024'],
+['f',16,'디지털 성범죄','불법 촬영과 딥페이크 성착취물 피해가 10대에게까지 번졌습니다. 피해자 상당수가 여성 청소년입니다.','2024년','딥페이크 성범죄가 학교로 번진 해',5,12,'UN 여성차별철폐위원회 · 방송통신심의위원회'],
+['m',30,'일터에서 돌아오지 못하는 사람','해마다 수백 명이 일하다 사고로 숨지고, 희생자 대부분은 건설·제조 현장의 남성 노동자입니다.','872명','산업재해 사고사망자 (2025, 유족급여 승인 기준)',8,23,'고용노동부 · ILO'],
+['m',20,'징벌적인 대체복무','2020년 대체복무제가 도입됐지만 교도소 합숙 36개월이어서, UN은 징벌적이라며 개선을 권고했습니다.','36개월','양심적 병역거부자 대체복무 기간',16,18,'UN 자유권위원회 최종견해 2023'],
+['a',15,'스스로 삶을 끝내는 사람들','한국은 OECD에서 자살률이 가장 높은 나라이며, 10대와 20대의 사망 원인 1위가 자살입니다.','1위','10~20대 사망 원인 중 자살 (통계청)',3,25,'통계청 사망원인통계 · OECD']]},
+{id:'COL',n:'콜롬비아',w:0.4,le:[74.0,80.0],u5:13,ur:82,city:['보고타','메데인'],nm:{m:['사무엘','마티아스','산티아고','하코보'],f:['살로메','이사벨라','마리아나','발레리아']},sn:['로드리게스','고메스','곤살레스','마르티네스'],is:[
+['f',17,'분쟁 속 성폭력','무장단체가 활동하는 지역에서 여성과 소녀는 성폭력과 인신매매의 위험에 놓여 있습니다.','3만 명+','피해자 등록부에 오른 분쟁 성폭력 피해자 (누적)',5,5,'UN 콜롬비아 검증임무단 · 콜롬비아 피해자지원청'],
+['m',14,'무장단체의 징집','무장단체가 농촌과 원주민 공동체의 소년들을 모집하는 일이 다시 늘고 있습니다.','증가','UN이 확인한 아동 징집 (최근 몇 년)',16,4,'UN 사무총장 아동과 무력분쟁 보고서'],
+['a',6,'고향을 떠난 사람들','수십 년 내전으로 세계에서 국내 실향민이 가장 많은 나라 중 하나가 됐습니다.','약 700만 명','국내 실향민 (누적)',16,13,'UNHCR'],
+['a',25,'목소리를 낸 대가','땅과 환경, 공동체를 지키려는 사회 지도자들이 해마다 백 명 넘게 살해됩니다.','100명+','한 해 살해된 인권옹호자·사회 지도자 (집계 기관에 따라 100~190여 명)',16,20,'UN 인권최고대표사무소 콜롬비아 · 콜롬비아 옴부즈만 · Indepaz']]}
+];
+const KOR=C.find(c=>c.id==='KOR');
+const TOTAL_W=C.reduce((s,c)=>s+c.w,0);
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function pickCountry(){let r=Math.random()*TOTAL_W;for(const c of C){r-=c.w;if(r<=0)return c}return C[0]}
+function josa(word,a,b){const ch=word.charCodeAt(word.length-1);if(ch<0xAC00||ch>0xD7A3)return word+a;return word+((ch-0xAC00)%28?a:b)}
+function fmtPct(w){return (w>=1?w.toFixed(1):w.toFixed(w>=.2?1:2)).replace(/\.0$/,'')+'%'}
+function makeName(c,g){
+  const given=rnd(c.nm[g]);
+  if(!c.sn.length)return given;
+  const i=Math.floor(Math.random()*c.sn.length);
+  const fam=(g==='f'&&c.sf)?c.sf[i]:c.sn[i];
+  if(c.ff)return c.sp?fam+' '+given:fam+given;
+  return given+' '+fam;
+}
+function makeLife(){
+  const c=pickCountry();
+  const g=Math.random()<0.512?'m':'f';
+  const urban=Math.random()*100<c.ur;
+  return {c,g,urban,place:urban?rnd(c.city):c.n+' 농촌',q:1+Math.floor(Math.random()*5),name:makeName(c,g)};
+}
+function pickIssues(c,g){
+  return c.is.filter(x=>x[0]==='a'||x[0]===g).slice(0,3).sort((a,b)=>a[1]-b[1]);
+}
+
+/* ---------- screens ---------- */
+const screens=['intro','roulette','birth','issues'];
+function show(id){
+  screens.forEach(s=>{$('#'+s).hidden=s!==id});
+  window.scrollTo(0,0);
+}
+
+/* intro: bars + live counter */
+(function(){
+  const top=[...C].sort((a,b)=>b.w-a.w).slice(0,8);
+  const max=top[0].w;
+  $('#bars').innerHTML=top.map(c=>`<li><span>${c.n}</span><span class="track"><span class="fill" style="width:${c.w/max*100}%"></span></span><span class="pct">${fmtPct(c.w)}</span></li>`).join('');
+  const t0=Date.now();
+  setInterval(()=>{$('#cBorn').textContent=Math.floor((Date.now()-t0)/1000*4.2).toLocaleString('ko-KR')},250);
+})();
+
+/* roulette */
+let life=null,timers=[],skipTo=null;
+function clearTimers(){timers.forEach(clearTimeout);timers=[]}
+function setStep(n){document.querySelectorAll('.r-steps i').forEach((el,i)=>el.classList.toggle('on',i<n))}
+function spin(values,final,render,total,done){
+  if(reduced){render(final);timers.push(setTimeout(done,500));return}
+  const n=values.length;let t=0;
+  values.concat([final]).forEach((v,i)=>{
+    const p=i/n;t+=40+Math.pow(p,3)*total/4;
+    timers.push(setTimeout(()=>render(v),t));
+  });
+  timers.push(setTimeout(done,t+900));
+}
+function startBirth(){
+  clearTimers();
+  life=makeLife();
+  show('roulette');
+  const name=$('#rName'),sub=$('#rSub'),lab=$('#rLabel');
+  const stage1=()=>{
+    lab.textContent='출생지를 정하는 중';setStep(1);
+    const seq=Array.from({length:24},pickCountry);
+    spin(seq,life.c,c=>{name.textContent=c.n;sub.textContent='세계 출생아 중 '+fmtPct(c.w)},2600,stage2);
+  };
+  const stage2=()=>{
+    lab.textContent='성별을 정하는 중';setStep(2);
+    const seq=Array.from({length:10},(_,i)=>i%2?'m':'f');
+    spin(seq,life.g,g=>{name.textContent=g==='f'?'여자아이':'남자아이';sub.textContent=g==='f'?'출생 성비 100 : 105':'출생 성비 105 : 100'},1200,stage3);
+  };
+  const stage3=()=>{
+    lab.textContent='태어날 곳을 정하는 중';setStep(3);
+    const seq=Array.from({length:8},(_,i)=>i%2?life.c.n+' 농촌':rnd(life.c.city));
+    spin(seq,life.place,p=>{name.textContent=p;sub.textContent=life.c.n+' 도시 인구 '+life.c.ur+'%'},1000,stage4);
+  };
+  const stage4=()=>{
+    lab.textContent='가정 형편을 정하는 중';setStep(4);
+    const seq=Array.from({length:8},()=>1+Math.floor(Math.random()*5));
+    spin(seq,life.q,q=>{name.textContent=WLIGHT[q];sub.textContent='소득 '+WEALTH[q]},1000,renderBirth);
+  };
+  skipTo=renderBirth;
+  stage1();
+}
+$('#skipBtn').onclick=()=>{clearTimers();skipTo&&skipTo()};
+
+/* birth certificate */
+function renderBirth(){
+  clearTimers();
+  const {c,g,place,q,name,urban}=life;
+  const now=new Date();
+  const le=c.le[g==='m'?0:1];
+  $('#certNo').textContent=`No. ${c.id}-${now.getFullYear()}-${String(Math.floor(Math.random()*9e6)+1e6)}`;
+  $('#certName').textContent=name;
+  const where=urban?`${c.n} ${place}`:place+' 마을';
+  $('#certStory').textContent=`${now.getFullYear()}년 ${now.getMonth()+1}월, ${where}의 ${WEALTH[q]} 가정에서 ${g==='f'?'여자아이':'남자아이'}로 태어났습니다.`;
+  const dots='●'.repeat(q)+'○'.repeat(5-q);
+  $('#fields').innerHTML=[
+    ['성별',g==='f'?'여성':'남성'],['출생국',c.n],['출생지',urban?place+' (도시)':'농촌'],
+    ['가정 형편',`<span class="dots">${dots}</span> ${q}분위`],['기대수명',le.toFixed(1)+'세'],['5세 전 사망 확률',(c.u5/10).toFixed(1)+'%']
+  ].map(([k,v])=>`<div><div class="lbl">${k}</div><div class="v">${v}</div></div>`).join('');
+  const perYear=Math.round(c.w/100*132e6/1e4);
+  const oneIn=Math.round(100/c.w);
+  $('#odds').textContent=`지금 태어나는 아기 중 ${fmtPct(c.w)}가 ${c.n}에서 태어납니다. 1년에 약 ${perYear.toLocaleString('ko-KR')}만 명, ${oneIn.toLocaleString('ko-KR')}명 중 1명꼴입니다.`;
+  if(c.id!=='KOR'){
+    const kle=KOR.le[g==='m'?0:1];
+    const row=(k,a,b,worse)=>`<tr><td>${k}</td><td>${a}</td><td class="${worse?'hi':''}">${b}</td></tr>`;
+    $('#cmpWrap').innerHTML=`<table class="cmp"><thead><tr><th>같은 날 태어났다면</th><th>대한민국</th><th>${c.n}</th></tr></thead><tbody>
+      ${row('기대수명 ('+(g==='f'?'여성':'남성')+')',kle.toFixed(1)+'세',le.toFixed(1)+'세',le<kle-1)}
+      ${row('5세 전에 세상을 떠날 확률',(KOR.u5/10).toFixed(1)+'%',(c.u5/10).toFixed(1)+'%',c.u5>KOR.u5)}
+    </tbody></table>`;
+  }else $('#cmpWrap').innerHTML='';
+  $('#sameList').innerHTML=Array.from({length:4},makeLife).map(o=>`<li><b>${o.name}</b><span>${o.urban?o.c.n+' '+o.place:o.place} · ${o.g==='f'?'여':'남'} · ${WLIGHT[o.q]}</span></li>`).join('');
+  show('birth');
+}
+
+/* issues */
+let shown=0,list=[];
+function issueHTML(x){
+  const [,age,title,body,n,t,sdg,art,src,label]=x;
+  const ageTxt=label||(age+'세 무렵');
+  const [sn,sc]=SDG[sdg];
+  return `<article class="issue" tabindex="-1">
+    <div class="age">${ageTxt}</div>
+    <h3>${title}</h3>
+    <p class="body">${body}</p>
+    <div class="stat"><b>${n}</b><span>${t}</span></div>
+    <div class="tags">
+      <span class="tag"><span class="sq" style="background:${sc}">${sdg}</span>SDG ${sdg} · ${sn}</span>
+      <span class="tag udhr">세계인권선언 제${art}조 · ${ART[art]}</span>
+    </div>
+    <p class="src">출처: ${src}</p>
+  </article>`;
+}
+function toIssues(){
+  const {c,g,name}=life;
+  list=pickIssues(c,g);shown=0;
+  $('#iEyebrow').textContent=`${c.n} · ${g==='f'?'여자아이':'남자아이'} · ${life.urban?life.place:'농촌'}`;
+  $('#iTitle').innerHTML=`<em>${name}</em>${josa(name,'이','가').slice(name.length)} 살면서<br>마주할 수 있는 세 가지 인권 문제`;
+  $('#timeline').innerHTML='';
+  $('#closing').hidden=true;$('#moreRow').hidden=false;$('#shareBox').hidden=true;
+  $('#askText').textContent=`${name}의 자리에 당신이 있다면, 가장 먼저 무엇이 바뀌기를 바랄까요? 그리고 그 변화를 위해 지금 여기에서 할 수 있는 일은 무엇일까요?`;
+  $('#bridgeText').innerHTML=`혼자서는 답하기 어려운 질문입니다.<br>${name}에게 필요한 변화, <em>인권교육전에서 함께 고민해 봐요.</em>`;
+  show('issues');
+  nextIssue();
+}
+function nextIssue(){
+  if(shown<list.length){
+    $('#timeline').insertAdjacentHTML('beforeend',issueHTML(list[shown]));
+    const el=$('#timeline').lastElementChild;
+    if(shown>0){el.scrollIntoView({behavior:reduced?'auto':'smooth',block:'center'});}
+    shown++;
+  }
+  if(shown<list.length){$('#nextIssue').innerHTML=`다음 이야기 <span class="num">(${shown+1}/${list.length})</span>`}
+  else{
+    $('#nextIssue').textContent='이 아이의 이야기를 마치며';
+    $('#nextIssue').onclick=()=>{$('#moreRow').hidden=true;$('#closing').hidden=false;$('#closing').scrollIntoView({behavior:reduced?'auto':'smooth'});$('#nextIssue').onclick=nextIssue};
+    return;
+  }
+  $('#nextIssue').onclick=nextIssue;
+}
+
+$('#bornBtn').onclick=startBirth;
+$('#rebirth1').onclick=startBirth;
+/* share: Web Share where the browser allows it, otherwise copy the message, otherwise show it to copy by hand */
+const SHARE_URL='https://claude.ai/artifact/4TqSykK7zTiyxFYytF5ykq';
+function shareText(){
+  const {c,g,name}=life;
+  const jong=(name.charCodeAt(name.length-1)-0xAC00)%28;
+  const ro=(jong>0&&jong!==8)?'으로':'로';
+  return `80억 분의 1의 권리 — 나는 ${c.n}에서 ${g==='f'?'여자아이':'남자아이'} ‘${name}’${ro} 태어났어요. 당신은 어디서 태어날까요?\n인권교육전 〈변혁의 첫걸음, 인권교육의 힘展〉 2026.11.20~12.5 · 서제주희망문화회관\n같이 가봐요! ${SHARE_URL}`;
+}
+function showShare(msg,text){
+  $('#shareBox').hidden=false;$('#shareMsg').textContent=msg;$('#shareText').value=text;
+}
+$('#shareBtn').onclick=async()=>{
+  const text=shareText();
+  if(navigator.share){
+    try{await navigator.share({title:'80억 분의 1의 권리',text});return}
+    catch(e){if(e&&e.name==='AbortError')return}
+  }
+  try{await navigator.clipboard.writeText(text);showShare('공유 문구와 링크를 복사했어요. 메신저에 붙여넣어 친구에게 보내 주세요.',text)}
+  catch(e){showShare('아래 문구를 길게 눌러 복사한 뒤 친구에게 보내 주세요.',text);const t=$('#shareText');t.focus();t.select()}
+};
+$('#toIssues').onclick=toIssues;
+$('#home').onclick=()=>{clearTimers();show('intro')};
+
+/* exhibition kiosk: return to the start after 3 minutes without input */
+let idle;
+function resetIdle(){clearTimeout(idle);idle=setTimeout(()=>{if($('#intro').hidden){clearTimers();show('intro')}},180000)}
+['pointerdown','keydown','scroll','touchstart'].forEach(e=>addEventListener(e,resetIdle,{passive:true}));
+resetIdle();
+</script>
